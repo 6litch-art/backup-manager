@@ -1,8 +1,13 @@
 {
-  "name": "backup-manager/backup-manager",
+  "name": "glitchr/backup-manager",
   "description": "A framework agnostic database backup manager with user-definable procedures and support for S3, Dropbox, FTP, SFTP, and more with drivers for popular frameworks.",
   "license": "MIT",
   "authors": [
+    {
+      "name": "Marco Meyer (Fork)",
+      "email": "marco.meyer@glitchr.io",
+      "homepage": "http://glitchr.io/"
+    },
     {
       "name": "Shawn McCool",
       "email": "shawn@heybigname.com",
