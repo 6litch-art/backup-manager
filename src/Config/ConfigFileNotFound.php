@@ -1,8 +1,8 @@
-<?php namespace BackupManager\Config;
+<?php namespace Backup\Manager\Config;
 
 /**
  * Class ConfigFileNotFound
- * @package BackupManager\Config
+ * @package Backup\Manager\Config
  */
 class ConfigFileNotFound extends \Exception
 {

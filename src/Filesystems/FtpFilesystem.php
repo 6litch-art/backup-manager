@@ -1,11 +1,11 @@
-<?php namespace BackupManager\Filesystems;
+<?php namespace Backup\Manager\Filesystems;
 
 use League\Flysystem\Adapter\Ftp;
 use League\Flysystem\Filesystem as Flysystem;
 
 /**
  * Class FtpFilesystem
- * @package BackupManager\Filesystems
+ * @package Backup\Manager\Filesystems
  */
 class FtpFilesystem implements Filesystem
 {

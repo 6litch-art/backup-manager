@@ -1,11 +1,11 @@
-<?php namespace BackupManager\Filesystems;
+<?php namespace Backup\Manager\Filesystems;
 
 use League\Flysystem\Filesystem as Flysystem;
 use Srmklive\Dropbox\Client\DropboxClient;
 use Srmklive\Dropbox\Adapter\DropboxAdapter;
 
 /**
- * @package BackupManager\Filesystems
+ * @package Backup\Manager\Filesystems
  */
 class DropboxV2Filesystem implements Filesystem
 {

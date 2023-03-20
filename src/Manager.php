@@ -1,11 +1,11 @@
-<?php namespace BackupManager;
+<?php namespace Backup\Manager;
 
-use BackupManager\Procedures;
+use Backup\Manager\Procedures;
 use Symfony\Component\Process\Process;
-use BackupManager\Databases\DatabaseProvider;
-use BackupManager\Filesystems\FilesystemProvider;
-use BackupManager\Compressors\CompressorProvider;
-use BackupManager\ShellProcessing\ShellProcessor;
+use Backup\Manager\Databases\DatabaseProvider;
+use Backup\Manager\Filesystems\FilesystemProvider;
+use Backup\Manager\Compressors\CompressorProvider;
+use Backup\Manager\ShellProcessing\ShellProcessor;
 
 /**
  * Class Manager
@@ -15,7 +15,7 @@ use BackupManager\ShellProcessing\ShellProcessor;
  * Once you've done that, your application can interact with the backup manager in one place only
  * and the rest of the system will interact with the new Manager-like construct that you created.
  *
- * @package BackupManager
+ * @package Backup\Manager
  */
 class Manager
 {

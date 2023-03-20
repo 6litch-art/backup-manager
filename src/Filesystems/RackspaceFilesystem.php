@@ -1,4 +1,4 @@
-<?php namespace BackupManager\Filesystems;
+<?php namespace Backup\Manager\Filesystems;
 
 use League\Flysystem\Rackspace\RackspaceAdapter;
 use League\Flysystem\Filesystem as Flysystem;
@@ -6,7 +6,7 @@ use OpenCloud\Rackspace;
 
 /**
  * Class RackspaceFilesystem
- * @package BackupManager\Filesystems
+ * @package Backup\Manager\Filesystems
  */
 class RackspaceFilesystem implements Filesystem
 {

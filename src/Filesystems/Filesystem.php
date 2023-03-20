@@ -1,8 +1,8 @@
-<?php namespace BackupManager\Filesystems;
+<?php namespace Backup\Manager\Filesystems;
 
 /**
  * Interface Filesystem
- * @package BackupManager\Filesystems
+ * @package Backup\Manager\Filesystems
  */
 interface Filesystem
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\BackupManager\Databases;
+namespace spec\Backup\Manager\Databases;
 
-use BackupManager\Config\Config;
-use BackupManager\Databases\MysqlDatabase;
+use Backup\Manager\Config\Config;
+use Backup\Manager\Databases\MysqlDatabase;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -17,18 +17,18 @@ class DatabaseProviderSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('BackupManager\Databases\DatabaseProvider');
+        $this->shouldHaveType('Backup\Manager\Databases\DatabaseProvider');
     }
 
     public function it_should_provide_requested_databases_by_name()
     {
         $this->add(new MysqlDatabase);
-        $this->get('development')->shouldHaveType('BackupManager\Databases\MysqlDatabase');
+        $this->get('development')->shouldHaveType('Backup\Manager\Databases\MysqlDatabase');
     }
 
     public function it_should_throw_an_exception_if_a_database_is_unsupported()
     {
-        $this->shouldThrow('BackupManager\Databases\DatabaseTypeNotSupported')->during('get', ['unsupported']);
+        $this->shouldThrow('Backup\Manager\Databases\DatabaseTypeNotSupported')->during('get', ['unsupported']);
     }
 
     public function it_should_provide_a_list_of_available_databases()

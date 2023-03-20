@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\BackupManager\Filesystems;
+namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class DropboxV2FilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('BackupManager\Filesystems\DropboxV2Filesystem');
+        $this->shouldHaveType('Backup\Manager\Filesystems\DropboxV2Filesystem');
     }
 
     public function it_should_recognize_its_type_with_case_insensitivity()

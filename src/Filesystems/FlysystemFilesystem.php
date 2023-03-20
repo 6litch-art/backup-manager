@@ -1,11 +1,11 @@
-<?php namespace BackupManager\Filesystems;
+<?php namespace Backup\Manager\Filesystems;
 
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\MountManager;
 
 /**
  * Class FlysystemFilesystem
- * @package BackupManager\Filesystems
+ * @package Backup\Manager\Filesystems
  */
 class FlysystemFilesystem implements Filesystem
 {

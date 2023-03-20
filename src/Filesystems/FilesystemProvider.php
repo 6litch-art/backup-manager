@@ -1,12 +1,12 @@
-<?php namespace BackupManager\Filesystems;
+<?php namespace Backup\Manager\Filesystems;
 
-use BackupManager\Config\Config;
-use BackupManager\Config\ConfigFieldNotFound;
-use BackupManager\Config\ConfigNotFoundForConnection;
+use Backup\Manager\Config\Config;
+use Backup\Manager\Config\ConfigFieldNotFound;
+use Backup\Manager\Config\ConfigNotFoundForConnection;
 
 /**
  * Class FilesystemProvider
- * @package BackupManager\Filesystems
+ * @package Backup\Manager\Filesystems
  */
 class FilesystemProvider
 {

@@ -1,8 +1,8 @@
-<?php namespace BackupManager\Compressors;
+<?php namespace Backup\Manager\Compressors;
 
 /**
  * Class GzipCompressor
- * @package BackupManager\Compressors
+ * @package Backup\Manager\Compressors
  */
 class GzipCompressor implements Compressor
 {

@@ -1,14 +1,14 @@
-<?php namespace BackupManager\Tasks\Database;
+<?php namespace Backup\Manager\Tasks\Database;
 
-use BackupManager\Tasks\Task;
-use BackupManager\Databases\Database;
+use Backup\Manager\Tasks\Task;
+use Backup\Manager\Databases\Database;
 use Symfony\Component\Process\Process;
-use BackupManager\ShellProcessing\ShellProcessor;
-use BackupManager\ShellProcessing\ShellProcessFailed;
+use Backup\Manager\ShellProcessing\ShellProcessor;
+use Backup\Manager\ShellProcessing\ShellProcessFailed;
 
 /**
  * Class DumpDatabase
- * @package BackupManager\Tasks\Database\Mysql
+ * @package Backup\Manager\Tasks\Database\Mysql
  */
 class DumpDatabase implements Task
 {

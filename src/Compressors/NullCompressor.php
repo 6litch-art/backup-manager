@@ -1,8 +1,8 @@
-<?php namespace BackupManager\Compressors;
+<?php namespace Backup\Manager\Compressors;
 
 /**
  * Class NullCompressor
- * @package BackupManager\Compressors
+ * @package Backup\Manager\Compressors
  */
 class NullCompressor implements Compressor
 {

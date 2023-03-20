@@ -1,8 +1,8 @@
-<?php namespace BackupManager\Compressors;
+<?php namespace Backup\Manager\Compressors;
 
 /**
  * Interface Compressor
- * @package BackupManager\Compressors
+ * @package Backup\Manager\Compressors
  */
 interface Compressor
 {

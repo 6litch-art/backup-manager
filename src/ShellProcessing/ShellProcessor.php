@@ -1,10 +1,10 @@
-<?php namespace BackupManager\ShellProcessing;
+<?php namespace Backup\Manager\ShellProcessing;
 
 use Symfony\Component\Process\Process;
 
 /**
  * Class CommandProcessor
- * @package BackupManager
+ * @package Backup\Manager
  */
 class ShellProcessor
 {

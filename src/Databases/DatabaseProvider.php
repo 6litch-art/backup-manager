@@ -1,11 +1,11 @@
-<?php namespace BackupManager\Databases;
+<?php namespace Backup\Manager\Databases;
 
-use BackupManager\Config\Config;
-use BackupManager\Config\ConfigNotFoundForConnection;
+use Backup\Manager\Config\Config;
+use Backup\Manager\Config\ConfigNotFoundForConnection;
 
 /**
  * Class DatabaseProvider
- * @package BackupManager\Databases
+ * @package Backup\Manager\Databases
  */
 class DatabaseProvider
 {
@@ -35,7 +35,7 @@ class DatabaseProvider
      * @return Database
      * @throws DatabaseTypeNotSupported
      * @throws ConfigNotFoundForConnection
-     * @throws \BackupManager\Config\ConfigFieldNotFound
+     * @throws \Backup\Manager\Config\ConfigFieldNotFound
      */
     public function get($name)
     {

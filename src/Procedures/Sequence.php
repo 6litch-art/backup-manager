@@ -1,10 +1,10 @@
-<?php namespace BackupManager\Procedures;
+<?php namespace Backup\Manager\Procedures;
 
-use BackupManager\Tasks\Task;
+use Backup\Manager\Tasks\Task;
 
 /**
  * Class Sequence
- * @package BackupManager\Procedures
+ * @package Backup\Manager\Procedures
  */
 class Sequence
 {

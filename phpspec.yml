@@ -1,8 +1,8 @@
 ---
 suites:
   backup_manager_suite:
-    namespace: BackupManager
-    psr4_prefix: BackupManager
+    namespace: Backup\Manager
+    psr4_prefix: Backup\Manager
 
 formatter.name: pretty
 

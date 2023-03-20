@@ -1,4 +1,4 @@
-<?php namespace BackupManager\Filesystems;
+<?php namespace Backup\Manager\Filesystems;
 
 final class Destination
 {

@@ -1,15 +1,15 @@
-<?php namespace BackupManager\Procedures;
+<?php namespace Backup\Manager\Procedures;
 
-use BackupManager\Compressors\CompressorTypeNotSupported;
-use BackupManager\Config\ConfigFieldNotFound;
-use BackupManager\Config\ConfigNotFoundForConnection;
-use BackupManager\Databases\DatabaseTypeNotSupported;
-use BackupManager\Filesystems\FilesystemTypeNotSupported;
-use BackupManager\Tasks;
+use Backup\Manager\Compressors\CompressorTypeNotSupported;
+use Backup\Manager\Config\ConfigFieldNotFound;
+use Backup\Manager\Config\ConfigNotFoundForConnection;
+use Backup\Manager\Databases\DatabaseTypeNotSupported;
+use Backup\Manager\Filesystems\FilesystemTypeNotSupported;
+use Backup\Manager\Tasks;
 
 /**
  * Class RestoreProcedure
- * @package BackupManager\Procedures
+ * @package Backup\Manager\Procedures
  */
 class RestoreProcedure extends Procedure
 {

@@ -1,12 +1,12 @@
-<?php namespace BackupManager\Tasks\Storage;
+<?php namespace Backup\Manager\Tasks\Storage;
 
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
-use BackupManager\Tasks\Task;
+use Backup\Manager\Tasks\Task;
 
 /**
  * Class DeleteFile
- * @package BackupManager\Tasks\Storage
+ * @package Backup\Manager\Tasks\Storage
  */
 class DeleteFile implements Task
 {

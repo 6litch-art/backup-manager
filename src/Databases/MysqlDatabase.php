@@ -1,8 +1,8 @@
-<?php namespace BackupManager\Databases;
+<?php namespace Backup\Manager\Databases;
 
 /**
  * Class MysqlDatabase
- * @package BackupManager\Databases
+ * @package Backup\Manager\Databases
  */
 class MysqlDatabase implements Database
 {

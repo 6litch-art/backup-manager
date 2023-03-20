@@ -1,4 +1,0 @@
-/vendor
-/.phpspec
-composer.lock
-.php-cs-fixer.cache

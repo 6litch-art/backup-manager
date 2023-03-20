@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\BackupManager\Filesystems;
+namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -11,13 +11,13 @@ use Prophecy\Argument;
  * This driver can't be tested because the library is poorly written
  * and the constructor immediately tries to connect.
  *
- * @package spec\BackupManager\Filesystems
+ * @package spec\Backup\Manager\Filesystems
  */
 class RackspaceFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('BackupManager\Filesystems\RackspaceFilesystem');
+        $this->shouldHaveType('Backup\Manager\Filesystems\RackspaceFilesystem');
     }
 
     public function it_should_recognize_its_type_with_case_insensitivity()

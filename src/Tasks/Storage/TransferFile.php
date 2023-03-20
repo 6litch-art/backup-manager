@@ -1,13 +1,13 @@
-<?php namespace BackupManager\Tasks\Storage;
+<?php namespace Backup\Manager\Tasks\Storage;
 
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
-use BackupManager\Tasks\Task;
+use Backup\Manager\Tasks\Task;
 
 /**
  * Class TransferFile
- * @package BackupManager\Tasks\Storage
+ * @package Backup\Manager\Tasks\Storage
  */
 class TransferFile implements Task
 {
