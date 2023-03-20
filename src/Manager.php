@@ -20,11 +20,11 @@ use Backup\Manager\ShellProcessing\ShellProcessor;
 class Manager
 {
     /** @var FilesystemProvider */
-    private $filesystems;
+    protected $filesystems;
     /** @var DatabaseProvider */
-    private $databases;
+    protected $databases;
     /** @var CompressorProvider */
-    private $compressors;
+    protected $compressors;
 
     /**
      * @param FilesystemProvider $filesystems
