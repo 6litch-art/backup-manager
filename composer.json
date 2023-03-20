@@ -27,18 +27,9 @@
   "require-dev": {
     "aws/aws-sdk-php": "^3.133.20",
     "phpspec/phpspec": "^7.2",
-    "spatie/flysystem-dropbox": "^1.2",
-    "srmklive/flysystem-dropbox-v2": "^1.0",
     "superbalist/flysystem-google-storage": "^7.2"
   },
   "suggest": {
-    "league/flysystem-aws-s3-v3": "AWS S3 adapter support.",
-    "league/flysystem-rackspace": "Rackspace adapter support.",
-    "league/flysystem-sftp-v3": "SFTP adapter support.",
-    "league/flysystem-webdav": "Webdav adapter support.",
-    "mhetreramesh/flysystem-backblaze": "B2 adapter support.",
-    "srmklive/flysystem-dropbox-v2": "Dropbox API v2 adapter support.",
-    "superbalist/flysystem-google-storage": "Google Cloud Storage adapter support."
   },
   "autoload": {
     "psr-4": {
