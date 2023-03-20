@@ -46,7 +46,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Backup\Manager\\": "src/"
+      "Backup\\Manager\\": "src/"
     }
   },
   "extra": {
