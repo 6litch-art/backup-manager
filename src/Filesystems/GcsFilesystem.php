@@ -10,7 +10,6 @@ use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
  */
 class GcsFilesystem implements Filesystem
 {
-
     /**
      * @param $type
      * @return bool
