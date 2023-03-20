@@ -26,8 +26,7 @@
   },
   "require-dev": {
     "aws/aws-sdk-php": "^3.133.20",
-    "phpspec/phpspec": "^7.2",
-    "superbalist/flysystem-google-storage": "^7.2"
+    "phpspec/phpspec": "^7.2"
   },
   "suggest": {
   },
