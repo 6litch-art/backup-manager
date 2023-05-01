@@ -1,6 +1,7 @@
 <?php namespace Backup\Manager\Filesystems;
 
 use BackblazeB2\Client;
+use Exception;
 use League\Flysystem\Filesystem as Flysystem;
 use Mhetreramesh\Flysystem\BackblazeAdapter;
 
@@ -23,7 +24,7 @@ class BackblazeFilesystem implements Filesystem
     /**
      * @param array $config
      * @return Flysystem
-     * @throws \Exception
+     * @throws Exception
      */
     public function get(array $config)
     {

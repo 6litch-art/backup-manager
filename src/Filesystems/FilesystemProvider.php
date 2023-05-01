@@ -11,9 +11,9 @@ use Backup\Manager\Config\ConfigNotFoundForConnection;
 class FilesystemProvider
 {
     /** @var Config */
-    private $config;
+    private Config $config;
     /** @var array */
-    private $filesystems = [];
+    private array $filesystems = [];
 
     /**
      * @param Config $config
@@ -48,7 +48,7 @@ class FilesystemProvider
             }
         }
 
-        throw new FilesystemTypeNotSupported("The requested filesystem type {$type} is not currently supported.");
+        throw new FilesystemTypeNotSupported("The requested filesystem type `" . $type . "` is not currently supported.");
     }
 
     /**

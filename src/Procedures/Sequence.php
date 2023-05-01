@@ -9,7 +9,7 @@ use Backup\Manager\Tasks\Task;
 class Sequence
 {
     /** @var array|Task[] */
-    private $tasks = [];
+    private array $tasks = [];
 
     /**
      * @param Task $task

@@ -11,7 +11,6 @@ class FilesystemProviderSpec extends ObjectBehavior
 {
     public function let()
     {
-        /** @noinspection PhpParamsInspection */
         $this->beConstructedWith(Config::fromPhpFile('spec/configs/storage.php'));
     }
 

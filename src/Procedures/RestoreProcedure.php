@@ -24,7 +24,7 @@ class RestoreProcedure extends Procedure
      * @throws DatabaseTypeNotSupported
      * @throws ConfigNotFoundForConnection
      */
-    public function run($sourceType, $sourcePath, $databaseName, $compression = null)
+    public function run(string $sourceType, string $sourcePath, string $databaseName, string $compression = null)
     {
         $sequence = new Sequence;
 

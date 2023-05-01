@@ -7,7 +7,7 @@
 class PostgresqlDatabase implements Database
 {
     /** @var array */
-    private $config;
+    private array $config;
 
     /**
      * @param $type
@@ -20,7 +20,6 @@ class PostgresqlDatabase implements Database
 
     /**
      * @param array $config
-     * @return null
      */
     public function setConfig(array $config)
     {
@@ -28,10 +27,10 @@ class PostgresqlDatabase implements Database
     }
 
     /**
-     * @param $outputPath
+     * @param $inputPath
      * @return string
      */
-    public function getDumpCommandLine($outputPath)
+    public function getDumpCommandLine($inputPath)
     {
         return sprintf(
             'PGPASSWORD=%s pg_dump --clean --host=%s --port=%s --username=%s %s -f %s',
@@ -40,15 +39,15 @@ class PostgresqlDatabase implements Database
             escapeshellarg($this->config['port']),
             escapeshellarg($this->config['user']),
             escapeshellarg($this->config['database']),
-            escapeshellarg($outputPath)
+            escapeshellarg($inputPath)
         );
     }
 
     /**
-     * @param $inputPath
+     * @param $outputPath
      * @return string
      */
-    public function getRestoreCommandLine($inputPath)
+    public function getRestoreCommandLine($outputPath)
     {
         return sprintf(
             'PGPASSWORD=%s psql --host=%s --port=%s --user=%s %s -f %s',
@@ -57,7 +56,7 @@ class PostgresqlDatabase implements Database
             escapeshellarg($this->config['port']),
             escapeshellarg($this->config['user']),
             escapeshellarg($this->config['database']),
-            escapeshellarg($inputPath)
+            escapeshellarg($outputPath)
         );
     }
 }

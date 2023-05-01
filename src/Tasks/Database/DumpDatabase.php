@@ -13,11 +13,11 @@ use Backup\Manager\ShellProcessing\ShellProcessFailed;
 class DumpDatabase implements Task
 {
     /** @var string */
-    private $outputPath;
+    private string $outputPath;
     /** @var ShellProcessor */
-    private $shellProcessor;
+    private ShellProcessor $shellProcessor;
     /** @var Database */
-    private $database;
+    private Database $database;
 
     /**
      * @param Database $database

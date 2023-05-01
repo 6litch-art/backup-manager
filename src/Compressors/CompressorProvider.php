@@ -7,7 +7,7 @@
 class CompressorProvider
 {
     /** @var array|Compressor[] */
-    private $compressors = [];
+    private array $compressors = [];
 
     /**
      * @param Compressor $compressor
@@ -29,6 +29,6 @@ class CompressorProvider
                 return $compressor;
             }
         }
-        throw new CompressorTypeNotSupported("The requested compressor type {$name} is not currently supported.");
+        throw new CompressorTypeNotSupported("The requested compressor type `" . $name . "` is not currently supported.");
     }
 }

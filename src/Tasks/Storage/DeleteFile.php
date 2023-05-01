@@ -11,9 +11,9 @@ use Backup\Manager\Tasks\Task;
 class DeleteFile implements Task
 {
     /** @var Filesystem */
-    private $filesystem;
+    private Filesystem $filesystem;
     /** @var string */
-    private $filePath;
+    private string $filePath;
 
     /**
      * @param Filesystem $filesystem
@@ -27,10 +27,9 @@ class DeleteFile implements Task
 
     /**
      * @return bool
-     * @throws FileNotFoundException
      */
     public function execute()
     {
-        return $this->filesystem->delete($this->filePath);
+        $this->filesystem->delete($this->filePath);
     }
 }

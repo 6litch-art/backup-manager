@@ -7,7 +7,7 @@
 class MysqlDatabase implements Database
 {
     /** @var array */
-    private $config;
+    private array $config;
 
     /**
      * @param $type
@@ -20,7 +20,6 @@ class MysqlDatabase implements Database
 
     /**
      * @param array $config
-     * @return null
      */
     public function setConfig(array $config)
     {
@@ -28,10 +27,10 @@ class MysqlDatabase implements Database
     }
 
     /**
-     * @param $outputPath
+     * @param $inputPath
      * @return string
      */
-    public function getDumpCommandLine($outputPath)
+    public function getDumpCommandLine($inputPath)
     {
         $extras = [];
         if (array_key_exists('singleTransaction', $this->config) && $this->config['singleTransaction'] === true) {
@@ -61,15 +60,15 @@ class MysqlDatabase implements Database
             $command,
             $params,
             escapeshellarg($this->config['database']),
-            escapeshellarg($outputPath)
+            escapeshellarg($inputPath)
         );
     }
 
     /**
-     * @param $inputPath
+     * @param $outputPath
      * @return string
      */
-    public function getRestoreCommandLine($inputPath)
+    public function getRestoreCommandLine($outputPath)
     {
         $extras = [];
         if (array_key_exists('ssl', $this->config) && $this->config['ssl'] === true) {
@@ -89,7 +88,7 @@ class MysqlDatabase implements Database
             'mysql%s ' . implode(' ', $extras) . ' %s -e "source %s"',
             $params,
             escapeshellarg($this->config['database']),
-            $inputPath
+            $outputPath
         );
     }
 

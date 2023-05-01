@@ -12,12 +12,12 @@ class FlysystemFilesystem implements Filesystem
     /**
      * @var array|FilesystemInterface[]
      */
-    private $filesystems;
+    private mixed $filesystems;
 
     /**
      * @var MountManager
      */
-    private $manager;
+    private ?MountManager $manager;
 
     public function __construct(/* iterable */ $filesystems = [], MountManager $manager = null)
     {

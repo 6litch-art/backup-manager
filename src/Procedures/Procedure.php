@@ -14,13 +14,13 @@ use Backup\Manager\ShellProcessing\ShellProcessor;
 abstract class Procedure
 {
     /** @var FilesystemProvider */
-    protected $filesystems;
+    protected FilesystemProvider $filesystems;
     /** @var DatabaseProvider */
-    protected $databases;
+    protected DatabaseProvider $databases;
     /** @var CompressorProvider */
-    protected $compressors;
+    protected CompressorProvider $compressors;
     /** @var ShellProcessor */
-    protected $shellProcessor;
+    protected ShellProcessor $shellProcessor;
 
     /**
      * @param FilesystemProvider $filesystemProvider

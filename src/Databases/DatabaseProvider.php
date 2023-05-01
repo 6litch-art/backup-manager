@@ -1,6 +1,7 @@
 <?php namespace Backup\Manager\Databases;
 
 use Backup\Manager\Config\Config;
+use Backup\Manager\Config\ConfigFieldNotFound;
 use Backup\Manager\Config\ConfigNotFoundForConnection;
 
 /**
@@ -10,9 +11,9 @@ use Backup\Manager\Config\ConfigNotFoundForConnection;
 class DatabaseProvider
 {
     /** @var Config */
-    private $config;
+    private Config $config;
     /** @var array */
-    private $databases = [];
+    private array $databases = [];
 
     /**
      * @param Config $config
@@ -35,7 +36,7 @@ class DatabaseProvider
      * @return Database
      * @throws DatabaseTypeNotSupported
      * @throws ConfigNotFoundForConnection
-     * @throws \Backup\Manager\Config\ConfigFieldNotFound
+     * @throws ConfigFieldNotFound
      */
     public function get($name)
     {
@@ -46,7 +47,7 @@ class DatabaseProvider
                 return $database;
             }
         }
-        throw new DatabaseTypeNotSupported("The requested database type {$type} is not currently supported.");
+        throw new DatabaseTypeNotSupported("The requested database type `" . $type . "` is not currently supported.");
     }
 
     /**

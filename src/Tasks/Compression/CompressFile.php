@@ -13,11 +13,11 @@ use Backup\Manager\ShellProcessing\ShellProcessor;
 class CompressFile implements Task
 {
     /** @var string */
-    private $sourcePath;
+    private string $sourcePath;
     /** @var ShellProcessor */
-    private $shellProcessor;
+    private ShellProcessor $shellProcessor;
     /** @var Compressor */
-    private $compressor;
+    private Compressor $compressor;
 
     /**
      * @param Compressor $compressor

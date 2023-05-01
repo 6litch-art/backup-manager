@@ -13,11 +13,11 @@ use Backup\Manager\ShellProcessing\ShellProcessFailed;
 class RestoreDatabase implements Task
 {
     /** @var string */
-    private $inputPath;
+    private string $inputPath;
     /** @var ShellProcessor */
-    private $shellProcessor;
+    private ShellProcessor $shellProcessor;
     /** @var Database */
-    private $database;
+    private Database $database;
 
     /**
      * @param Database $database

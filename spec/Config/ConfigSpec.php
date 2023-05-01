@@ -9,13 +9,11 @@ class ConfigSpec extends ObjectBehavior
 {
     public function let()
     {
-        /** @noinspection PhpParamsInspection */
         $this->beConstructedWith([]);
     }
 
     public function it_is_initializable()
     {
-        /** @noinspection PhpParamsInspection */
         $this->shouldHaveType('Backup\Manager\Config\Config');
     }
 
