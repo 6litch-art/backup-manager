@@ -5,7 +5,6 @@ namespace spec\Backup\Manager;
 use Backup\Manager\Compressors\CompressorProvider;
 use Backup\Manager\Databases\DatabaseProvider;
 use Backup\Manager\Filesystems\FilesystemProvider;
-
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
