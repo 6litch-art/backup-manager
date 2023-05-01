@@ -42,7 +42,7 @@ class FilesystemProvider
             }
         }
 
-        throw new FilesystemTypeNotSupported('The requested filesystem type `'.$type.'` is not currently supported.');
+        throw new FilesystemTypeNotSupported('The requested filesystem type `' . $type . '` is not currently supported.');
     }
 
     /**

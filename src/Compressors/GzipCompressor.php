@@ -20,7 +20,7 @@ class GzipCompressor implements Compressor
      */
     public function getCompressCommandLine($inputPath)
     {
-        return 'gzip '.escapeshellarg($inputPath);
+        return 'gzip ' . escapeshellarg($inputPath);
     }
 
     /**
@@ -28,7 +28,7 @@ class GzipCompressor implements Compressor
      */
     public function getDecompressCommandLine($outputPath)
     {
-        return 'gzip -d '.escapeshellarg($outputPath);
+        return 'gzip -d ' . escapeshellarg($outputPath);
     }
 
     /**
@@ -36,7 +36,7 @@ class GzipCompressor implements Compressor
      */
     public function getCompressedPath($inputPath)
     {
-        return $inputPath.'.gz';
+        return $inputPath . '.gz';
     }
 
     /**

@@ -50,7 +50,7 @@ class MysqlDatabase implements Database
             }
         }
 
-        $command = 'mysqldump --column-statistics=0 --routines '.implode(' ', $extras).'%s %s > %s';
+        $command = 'mysqldump --column-statistics=0 --routines ' . implode(' ', $extras) . '%s %s > %s';
 
         return sprintf(
             $command,
@@ -80,7 +80,7 @@ class MysqlDatabase implements Database
         }
 
         return sprintf(
-            'mysql%s '.implode(' ', $extras).' %s -e "source %s"',
+            'mysql%s ' . implode(' ', $extras) . ' %s -e "source %s"',
             $params,
             escapeshellarg($this->config['database']),
             $outputPath
@@ -98,7 +98,7 @@ class MysqlDatabase implements Database
 
         $db = $this->config['database'];
         $ignoreTables = array_map(function ($table) use ($db) {
-            return $db.'.'.$table;
+            return $db . '.' . $table;
         }, $this->config['ignoreTables']);
 
         $commands = [];

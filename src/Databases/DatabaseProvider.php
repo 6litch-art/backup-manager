@@ -42,7 +42,7 @@ class DatabaseProvider
                 return $database;
             }
         }
-        throw new DatabaseTypeNotSupported('The requested database type `'.$type.'` is not currently supported.');
+        throw new DatabaseTypeNotSupported('The requested database type `' . $type . '` is not currently supported.');
     }
 
     /**
