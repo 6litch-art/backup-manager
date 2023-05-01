@@ -4,6 +4,9 @@ namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 
+/**
+ *
+ */
 class FtpFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -28,6 +31,9 @@ class FtpFilesystemSpec extends ObjectBehavior
             ->shouldHaveType('League\Flysystem\Adapter\Ftp');
     }
 
+    /**
+     * @return string[]
+     */
     public function getConfig()
     {
         return [

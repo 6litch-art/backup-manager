@@ -17,6 +17,10 @@ class PostgresqlDatabase implements Database
         return in_array(strtolower($type ?? ''), ['postgresql', 'postgres', 'pgsql']);
     }
 
+    /**
+     * @param array $config
+     * @return void|null
+     */
     public function setConfig(array $config)
     {
         $this->config = $config;

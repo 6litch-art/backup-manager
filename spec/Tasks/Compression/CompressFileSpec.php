@@ -7,6 +7,9 @@ use Backup\Manager\ShellProcessing\ShellProcessor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class CompressFileSpec extends ObjectBehavior
 {
     public function it_is_initializable(Compressor $compressor, ShellProcessor $shellProcessor)

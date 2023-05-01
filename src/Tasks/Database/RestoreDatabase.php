@@ -19,6 +19,11 @@ class RestoreDatabase implements Task
 
     private Database $database;
 
+    /**
+     * @param Database $database
+     * @param $inputPath
+     * @param ShellProcessor $shellProcessor
+     */
     public function __construct(Database $database, $inputPath, ShellProcessor $shellProcessor)
     {
         $this->inputPath = $inputPath;

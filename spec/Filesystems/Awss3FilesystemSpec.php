@@ -4,6 +4,9 @@ namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 
+/**
+ *
+ */
 class Awss3FilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -27,6 +30,9 @@ class Awss3FilesystemSpec extends ObjectBehavior
         $this->get($this->getConfig())->getAdapter()->shouldHaveType('League\Flysystem\AwsS3v3\AwsS3Adapter');
     }
 
+    /**
+     * @return string[]
+     */
     public function getConfig()
     {
         return [

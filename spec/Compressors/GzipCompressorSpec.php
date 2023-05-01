@@ -5,6 +5,9 @@ namespace spec\Backup\Manager\Compressors;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class GzipCompressorSpec extends ObjectBehavior
 {
     public function it_is_initializable()

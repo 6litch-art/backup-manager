@@ -4,6 +4,9 @@ namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 
+/**
+ *
+ */
 class WebdavFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -28,6 +31,9 @@ class WebdavFilesystemSpec extends ObjectBehavior
             ->shouldHaveType('League\Flysystem\WebDAV\WebDAVAdapter');
     }
 
+    /**
+     * @return string[]
+     */
     public function getConfig()
     {
         return [

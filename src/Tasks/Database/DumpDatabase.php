@@ -19,6 +19,11 @@ class DumpDatabase implements Task
 
     private Database $database;
 
+    /**
+     * @param Database $database
+     * @param $outputPath
+     * @param ShellProcessor $shellProcessor
+     */
     public function __construct(Database $database, $outputPath, ShellProcessor $shellProcessor)
     {
         $this->outputPath = $outputPath;

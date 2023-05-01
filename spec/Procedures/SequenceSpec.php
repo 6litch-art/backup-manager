@@ -6,6 +6,9 @@ use Backup\Manager\Tasks\Task;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class SequenceSpec extends ObjectBehavior
 {
     public function it_is_initializable()

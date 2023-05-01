@@ -4,6 +4,9 @@ namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 
+/**
+ *
+ */
 class SftpFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -28,6 +31,9 @@ class SftpFilesystemSpec extends ObjectBehavior
             ->shouldHaveType('League\Flysystem\Sftp\SftpAdapter');
     }
 
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return [

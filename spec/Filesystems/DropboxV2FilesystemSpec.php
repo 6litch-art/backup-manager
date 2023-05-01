@@ -4,6 +4,9 @@ namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 
+/**
+ *
+ */
 class DropboxV2FilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -28,6 +31,9 @@ class DropboxV2FilesystemSpec extends ObjectBehavior
             ->shouldHaveType('Srmklive\Dropbox\Adapter\DropboxAdapter');
     }
 
+    /**
+     * @return string[]
+     */
     public function getConfig()
     {
         return [

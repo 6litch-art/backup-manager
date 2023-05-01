@@ -17,6 +17,10 @@ class MysqlDatabase implements Database
         return 'mysql' == strtolower($type ?? '') || 'pdo_mysql' == strtolower($type ?? '');
     }
 
+    /**
+     * @param array $config
+     * @return void|null
+     */
     public function setConfig(array $config)
     {
         $this->config = $config;

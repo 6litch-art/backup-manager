@@ -8,6 +8,9 @@ use League\Flysystem\MountManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class FlysystemFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()

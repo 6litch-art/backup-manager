@@ -9,6 +9,9 @@ use GuzzleHttp\Psr7\Response;
 use PhpSpec\Exception\Example\SkippingException;
 use PhpSpec\ObjectBehavior;
 
+/**
+ *
+ */
 class BackblazeFilesystemSpec extends ObjectBehavior
 {
     public function let(): void
@@ -39,6 +42,9 @@ class BackblazeFilesystemSpec extends ObjectBehavior
         $this->get($this->getConfig())->getAdapter()->shouldHaveType('Mhetreramesh\Flysystem\BackblazeAdapter');
     }
 
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return [
@@ -49,6 +55,9 @@ class BackblazeFilesystemSpec extends ObjectBehavior
         ];
     }
 
+    /**
+     * @return Client
+     */
     public function getMockClient()
     {
         $handler = new HandlerStack(new MockHandler([$this->getMockAuthorizationResponse()]));
@@ -56,6 +65,9 @@ class BackblazeFilesystemSpec extends ObjectBehavior
         return new Client(['handler' => $handler]);
     }
 
+    /**
+     * @return Response
+     */
     public function getMockAuthorizationResponse()
     {
         $body = '{

@@ -6,6 +6,9 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Component\Process\Process;
 use Backup\Manager\ShellProcessing\ShellProcessFailed;
 
+/**
+ *
+ */
 class ShellProcessorSpec extends ObjectBehavior
 {
     public function it_should_execute_a_command_line_process(Process $process)

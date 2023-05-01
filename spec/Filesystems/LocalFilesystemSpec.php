@@ -5,6 +5,9 @@ namespace spec\Backup\Manager\Filesystems;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class LocalFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -28,6 +31,9 @@ class LocalFilesystemSpec extends ObjectBehavior
         $this->get($this->getConfig())->getAdapter()->shouldHaveType('League\Flysystem\Adapter\Local');
     }
 
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return [

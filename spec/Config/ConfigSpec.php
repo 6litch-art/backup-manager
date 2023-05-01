@@ -5,6 +5,9 @@ namespace spec\Backup\Manager\Config;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class ConfigSpec extends ObjectBehavior
 {
     public function let()

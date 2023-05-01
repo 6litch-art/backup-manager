@@ -6,6 +6,7 @@ use Backup\Manager\Tasks\Task;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemException;
 
 /**
  * Class TransferFile.
@@ -21,6 +22,12 @@ class TransferFile implements Task
     /** @var string */
     private $destinationPath;
 
+    /**
+     * @param Filesystem $sourceFilesystem
+     * @param $sourcePath
+     * @param Filesystem $destinationFilesystem
+     * @param $destinationPath
+     */
     public function __construct(Filesystem $sourceFilesystem, $sourcePath, Filesystem $destinationFilesystem, $destinationPath)
     {
         $this->sourceFilesystem = $sourceFilesystem;
@@ -30,8 +37,7 @@ class TransferFile implements Task
     }
 
     /**
-     * @throws FileExistsException
-     * @throws FileNotFoundException
+     * @throws FilesystemException
      */
     public function execute()
     {

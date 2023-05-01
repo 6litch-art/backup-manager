@@ -3,9 +3,15 @@
 namespace spec\Backup\Manager\Databases;
 
 use Backup\Manager\Config\Config;
+use Backup\Manager\Config\ConfigFieldNotFound;
+use Backup\Manager\Config\ConfigFileNotFound;
+use Backup\Manager\Config\ConfigNotFoundForConnection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class MysqlDatabaseSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -42,6 +48,13 @@ class MysqlDatabaseSpec extends ObjectBehavior
         $this->getRestoreCommandLine('outputPath')->shouldBe("mysql --host='foo' --port='3306' --user='bar' --password='baz'  'test' -e \"source outputPath\"");
     }
 
+    /**
+     * @param $db
+     * @return void
+     * @throws ConfigFieldNotFound
+     * @throws ConfigFileNotFound
+     * @throws ConfigNotFoundForConnection
+     */
     private function configure($db = 'development')
     {
         $config = Config::fromPhpFile('spec/configs/database.php');

@@ -6,6 +6,9 @@ use League\Flysystem\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ *
+ */
 class TransferFileSpec extends ObjectBehavior
 {
     public function it_is_initializable(Filesystem $filesystem)
