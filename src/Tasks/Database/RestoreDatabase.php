@@ -1,29 +1,24 @@
-<?php namespace Backup\Manager\Tasks\Database;
+<?php
 
-use Backup\Manager\Tasks\Task;
+namespace Backup\Manager\Tasks\Database;
+
 use Backup\Manager\Databases\Database;
-use Symfony\Component\Process\Process;
-use Backup\Manager\ShellProcessing\ShellProcessor;
 use Backup\Manager\ShellProcessing\ShellProcessFailed;
+use Backup\Manager\ShellProcessing\ShellProcessor;
+use Backup\Manager\Tasks\Task;
+use Symfony\Component\Process\Process;
 
 /**
- * Class RestoreDatabase
- * @package Backup\Manager\Tasks\Database
+ * Class RestoreDatabase.
  */
 class RestoreDatabase implements Task
 {
-    /** @var string */
     private string $inputPath;
-    /** @var ShellProcessor */
+
     private ShellProcessor $shellProcessor;
-    /** @var Database */
+
     private Database $database;
 
-    /**
-     * @param Database $database
-     * @param $inputPath
-     * @param ShellProcessor $shellProcessor
-     */
     public function __construct(Database $database, $inputPath, ShellProcessor $shellProcessor)
     {
         $this->inputPath = $inputPath;

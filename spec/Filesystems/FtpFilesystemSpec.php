@@ -3,7 +3,6 @@
 namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FtpFilesystemSpec extends ObjectBehavior
 {
@@ -32,7 +31,7 @@ class FtpFilesystemSpec extends ObjectBehavior
     public function getConfig()
     {
         return [
-            'host'     => 'ftp.example.com',
+            'host' => 'ftp.example.com',
             'username' => 'example.com',
             'password' => 'password',
         ];

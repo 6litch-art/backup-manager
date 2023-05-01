@@ -1,16 +1,15 @@
-<?php namespace Backup\Manager\Databases;
+<?php
+
+namespace Backup\Manager\Databases;
 
 /**
- * Class PostgresqlDatabase
- * @package Backup\Manager\Databases
+ * Class PostgresqlDatabase.
  */
 class PostgresqlDatabase implements Database
 {
-    /** @var array */
     private array $config;
 
     /**
-     * @param $type
      * @return bool
      */
     public function handles($type)
@@ -18,16 +17,12 @@ class PostgresqlDatabase implements Database
         return in_array(strtolower($type ?? ''), ['postgresql', 'postgres', 'pgsql']);
     }
 
-    /**
-     * @param array $config
-     */
     public function setConfig(array $config)
     {
         $this->config = $config;
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getDumpCommandLine($inputPath)
@@ -44,7 +39,6 @@ class PostgresqlDatabase implements Database
     }
 
     /**
-     * @param $outputPath
      * @return string
      */
     public function getRestoreCommandLine($outputPath)

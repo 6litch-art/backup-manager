@@ -1,22 +1,21 @@
-<?php namespace Backup\Manager\Compressors;
+<?php
+
+namespace Backup\Manager\Compressors;
 
 /**
- * Class NullCompressor
- * @package Backup\Manager\Compressors
+ * Class NullCompressor.
  */
 class NullCompressor implements Compressor
 {
     /**
-     * @param $type
      * @return bool
      */
     public function handles($type)
     {
-        return strtolower($type ?? '') == 'null';
+        return 'null' == strtolower($type ?? '');
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getCompressCommandLine($inputPath)
@@ -25,7 +24,6 @@ class NullCompressor implements Compressor
     }
 
     /**
-     * @param $outputPath
      * @return string
      */
     public function getDecompressCommandLine($outputPath)
@@ -34,7 +32,6 @@ class NullCompressor implements Compressor
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getCompressedPath($inputPath)
@@ -43,7 +40,6 @@ class NullCompressor implements Compressor
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getDecompressedPath($inputPath)

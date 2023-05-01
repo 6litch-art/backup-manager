@@ -1,24 +1,19 @@
-<?php namespace Backup\Manager\Tasks\Storage;
+<?php
 
-use League\Flysystem\FileNotFoundException;
-use League\Flysystem\Filesystem;
+namespace Backup\Manager\Tasks\Storage;
+
 use Backup\Manager\Tasks\Task;
+use League\Flysystem\Filesystem;
 
 /**
- * Class DeleteFile
- * @package Backup\Manager\Tasks\Storage
+ * Class DeleteFile.
  */
 class DeleteFile implements Task
 {
-    /** @var Filesystem */
     private Filesystem $filesystem;
-    /** @var string */
+
     private string $filePath;
 
-    /**
-     * @param Filesystem $filesystem
-     * @param $filePath
-     */
     public function __construct(Filesystem $filesystem, $filePath)
     {
         $this->filesystem = $filesystem;

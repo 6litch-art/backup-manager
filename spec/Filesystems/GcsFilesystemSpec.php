@@ -3,7 +3,6 @@
 namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
 
 class GcsFilesystemSpec extends ObjectBehavior
@@ -32,11 +31,11 @@ class GcsFilesystemSpec extends ObjectBehavior
     public function getConfig()
     {
         return [
-            'type'         => 'gcs',
-            'keyFilePath'  => '',
-            'project'      => 'example',
-            'bucket'       => 'example',
-            'prefix'       => '',
+            'type' => 'gcs',
+            'keyFilePath' => '',
+            'project' => 'example',
+            'bucket' => 'example',
+            'prefix' => '',
         ];
     }
 }

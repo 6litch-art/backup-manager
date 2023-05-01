@@ -1,9 +1,11 @@
-<?php namespace spec\Backup\Manager\Tasks\Database;
+<?php
 
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
+namespace spec\Backup\Manager\Tasks\Database;
+
 use Backup\Manager\Databases\Database;
 use Backup\Manager\ShellProcessing\ShellProcessor;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class RestoreDatabaseSpec extends ObjectBehavior
 {

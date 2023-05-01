@@ -1,39 +1,33 @@
-<?php namespace Backup\Manager\Filesystems;
+<?php
+
+namespace Backup\Manager\Filesystems;
 
 use Backup\Manager\Config\Config;
 use Backup\Manager\Config\ConfigFieldNotFound;
 use Backup\Manager\Config\ConfigNotFoundForConnection;
 
 /**
- * Class FilesystemProvider
- * @package Backup\Manager\Filesystems
+ * Class FilesystemProvider.
  */
 class FilesystemProvider
 {
-    /** @var Config */
     private Config $config;
-    /** @var array */
+
     private array $filesystems = [];
 
-    /**
-     * @param Config $config
-     */
     public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
-    /**
-     * @param Filesystem $filesystem
-     */
     public function add(Filesystem $filesystem)
     {
         $this->filesystems[] = $filesystem;
     }
 
     /**
-     * @param $name
      * @return \League\Flysystem\Filesystem
+     *
      * @throws FilesystemTypeNotSupported
      * @throws ConfigNotFoundForConnection
      * @throws ConfigFieldNotFound
@@ -48,13 +42,14 @@ class FilesystemProvider
             }
         }
 
-        throw new FilesystemTypeNotSupported("The requested filesystem type `" . $type . "` is not currently supported.");
+        throw new FilesystemTypeNotSupported('The requested filesystem type `'.$type.'` is not currently supported.');
     }
 
     /**
-     * @param $name
      * @param null $key
+     *
      * @return mixed
+     *
      * @throws ConfigNotFoundForConnection
      * @throws ConfigFieldNotFound
      */

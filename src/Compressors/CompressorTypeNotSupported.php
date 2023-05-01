@@ -1,11 +1,10 @@
-<?php namespace Backup\Manager\Compressors;
+<?php
 
-use Exception;
+namespace Backup\Manager\Compressors;
 
 /**
- * Class CompressorTypeNotSupported
- * @package Backup\Manager\Compressors
+ * Class CompressorTypeNotSupported.
  */
-class CompressorTypeNotSupported extends Exception
+class CompressorTypeNotSupported extends \Exception
 {
 }

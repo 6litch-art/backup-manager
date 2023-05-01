@@ -1,11 +1,10 @@
-<?php namespace Backup\Manager\Filesystems;
+<?php
 
-use Exception;
+namespace Backup\Manager\Filesystems;
 
 /**
- * Class FilesystemTypeNotSupported
- * @package Backup\Manager\Filesystems
+ * Class FilesystemTypeNotSupported.
  */
-class FilesystemTypeNotSupported extends Exception
+class FilesystemTypeNotSupported extends \Exception
 {
 }

@@ -1,24 +1,24 @@
 <?php
 
 return [
-    'local'       => [
+    'local' => [
         'type' => 'Local',
         'root' => '/tmp',
     ],
-    's3'          => [
-        'type'   => 'AwsS3',
-        'key'    => '',
+    's3' => [
+        'type' => 'AwsS3',
+        'key' => '',
         'secret' => '',
         'region' => 'us-east-1',
         'version' => 'latest',
         'bucket' => '',
-        'root'   => '',
+        'root' => '',
     ],
     'unsupported' => [
         'type' => 'doesnt exist',
     ],
-    'null'        => [
+    'null' => [
         'type' => null,
         'root' => null,
-    ]
+    ],
 ];

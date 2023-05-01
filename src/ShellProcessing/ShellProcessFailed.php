@@ -1,11 +1,10 @@
-<?php namespace Backup\Manager\ShellProcessing;
+<?php
 
-use Exception;
+namespace Backup\Manager\ShellProcessing;
 
 /**
- * Class ShellProcessFailed
- * @package Backup\Manager\ShellProcessing
+ * Class ShellProcessFailed.
  */
-class ShellProcessFailed extends Exception
+class ShellProcessFailed extends \Exception
 {
 }

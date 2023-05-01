@@ -1,11 +1,12 @@
-<?php namespace Backup\Manager\Filesystems;
+<?php
+
+namespace Backup\Manager\Filesystems;
 
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\MountManager;
 
 /**
- * Class FlysystemFilesystem
- * @package Backup\Manager\Filesystems
+ * Class FlysystemFilesystem.
  */
 class FlysystemFilesystem implements Filesystem
 {
@@ -26,12 +27,11 @@ class FlysystemFilesystem implements Filesystem
     }
 
     /**
-     * @param $type
      * @return bool
      */
     public function handles($type)
     {
-        return strtolower($type ?? '') === 'flysystem';
+        return 'flysystem' === strtolower($type ?? '');
     }
 
     public function get(array $config)

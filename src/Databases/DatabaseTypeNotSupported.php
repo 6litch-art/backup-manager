@@ -1,11 +1,10 @@
-<?php namespace Backup\Manager\Databases;
+<?php
 
-use Exception;
+namespace Backup\Manager\Databases;
 
 /**
- * Class DatabaseTypeNotSupported
- * @package Backup\Manager\Databases
+ * Class DatabaseTypeNotSupported.
  */
-class DatabaseTypeNotSupported extends Exception
+class DatabaseTypeNotSupported extends \Exception
 {
 }

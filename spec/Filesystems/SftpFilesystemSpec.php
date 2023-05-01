@@ -3,7 +3,6 @@
 namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class SftpFilesystemSpec extends ObjectBehavior
 {
@@ -32,12 +31,12 @@ class SftpFilesystemSpec extends ObjectBehavior
     public function getConfig()
     {
         return [
-            'host'       => 'sftp.example.com',
-            'username'   => 'example.com',
-            'password'   => 'password',
-            'root'       => '/path/to/root',
-            'port'       => 21,
-            'timeout'    => 10,
+            'host' => 'sftp.example.com',
+            'username' => 'example.com',
+            'password' => 'password',
+            'root' => '/path/to/root',
+            'port' => 21,
+            'timeout' => 10,
             'privateKey' => '~/.ssh/private_key',
         ];
     }

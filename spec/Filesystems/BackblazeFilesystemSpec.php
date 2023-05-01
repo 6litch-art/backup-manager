@@ -42,10 +42,10 @@ class BackblazeFilesystemSpec extends ObjectBehavior
     public function getConfig()
     {
         return [
-            'key'       => 'test_key',
+            'key' => 'test_key',
             'accountId' => 'test_id',
-            'bucket'    => 'bucket',
-            'options'   => ['client' => $this->getMockClient()]
+            'bucket' => 'bucket',
+            'options' => ['client' => $this->getMockClient()],
         ];
     }
 

@@ -1,49 +1,45 @@
-<?php namespace Backup\Manager\Compressors;
+<?php
+
+namespace Backup\Manager\Compressors;
 
 /**
- * Class GzipCompressor
- * @package Backup\Manager\Compressors
+ * Class GzipCompressor.
  */
 class GzipCompressor implements Compressor
 {
     /**
-     * @param $type
      * @return bool
      */
     public function handles($type)
     {
-        return strtolower($type ?? '') == 'gzip';
+        return 'gzip' == strtolower($type ?? '');
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getCompressCommandLine($inputPath)
     {
-        return 'gzip ' . escapeshellarg($inputPath);
+        return 'gzip '.escapeshellarg($inputPath);
     }
 
     /**
-     * @param $outputPath
      * @return string
      */
     public function getDecompressCommandLine($outputPath)
     {
-        return 'gzip -d ' . escapeshellarg($outputPath);
+        return 'gzip -d '.escapeshellarg($outputPath);
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getCompressedPath($inputPath)
     {
-        return $inputPath . '.gz';
+        return $inputPath.'.gz';
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getDecompressedPath($inputPath)

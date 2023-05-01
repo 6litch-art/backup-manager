@@ -1,31 +1,31 @@
-<?php namespace Backup\Manager\Filesystems;
+<?php
 
+namespace Backup\Manager\Filesystems;
+
+use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Ftp\FtpAdapter;
 use League\Flysystem\Ftp\FtpConnectionOptions;
-use League\Flysystem\Filesystem as Flysystem;
 
 /**
- * Class FtpFilesystem
- * @package Backup\Manager\Filesystems
+ * Class FtpFilesystem.
  */
 class FtpFilesystem implements Filesystem
 {
     /**
      * Test fitness of visitor.
-     * @param $type
+     *
      * @return bool
      */
     public function handles($type)
     {
-        return strtolower($type ?? '') == 'ftp';
+        return 'ftp' == strtolower($type ?? '');
     }
 
     /**
-     * @param array $config
      * @return Flysystem
      */
     public function get(array $config)
     {
-        return new Flysystem(new FtpAdapter(new FtpConnectionOptions(...($config["connection"] ?? []))));
+        return new Flysystem(new FtpAdapter(new FtpConnectionOptions(...($config['connection'] ?? []))));
     }
 }

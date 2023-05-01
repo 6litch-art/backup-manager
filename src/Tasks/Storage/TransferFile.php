@@ -1,13 +1,14 @@
-<?php namespace Backup\Manager\Tasks\Storage;
+<?php
 
+namespace Backup\Manager\Tasks\Storage;
+
+use Backup\Manager\Tasks\Task;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
-use Backup\Manager\Tasks\Task;
 
 /**
- * Class TransferFile
- * @package Backup\Manager\Tasks\Storage
+ * Class TransferFile.
  */
 class TransferFile implements Task
 {
@@ -20,12 +21,6 @@ class TransferFile implements Task
     /** @var string */
     private $destinationPath;
 
-    /**
-     * @param Filesystem $sourceFilesystem
-     * @param $sourcePath
-     * @param Filesystem $destinationFilesystem
-     * @param $destinationPath
-     */
     public function __construct(Filesystem $sourceFilesystem, $sourcePath, Filesystem $destinationFilesystem, $destinationPath)
     {
         $this->sourceFilesystem = $sourceFilesystem;

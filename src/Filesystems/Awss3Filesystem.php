@@ -1,26 +1,25 @@
-<?php namespace Backup\Manager\Filesystems;
+<?php
 
-use League\Flysystem\AwsS3v3\AwsS3Adapter;
+namespace Backup\Manager\Filesystems;
+
 use Aws\S3\S3Client;
+use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem as Flysystem;
 
 /**
- * Class Awss3Filesystem
- * @package Backup\Manager\Filesystems
+ * Class Awss3Filesystem.
  */
 class Awss3Filesystem implements Filesystem
 {
     /**
-     * @param $type
      * @return bool
      */
     public function handles($type)
     {
-        return strtolower($type ?? '') == 'awss3';
+        return 'awss3' == strtolower($type ?? '');
     }
 
     /**
-     * @param array $config
      * @return Flysystem
      */
     public function get(array $config)

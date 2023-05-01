@@ -3,7 +3,6 @@
 namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class WebdavFilesystemSpec extends ObjectBehavior
 {
@@ -32,10 +31,10 @@ class WebdavFilesystemSpec extends ObjectBehavior
     public function getConfig()
     {
         return [
-            'baseUri'  => 'http://myserver.com',
+            'baseUri' => 'http://myserver.com',
             'userName' => '',
             'password' => '',
-            'prefix'   => '',
+            'prefix' => '',
         ];
     }
 }

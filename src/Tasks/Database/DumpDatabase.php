@@ -1,29 +1,24 @@
-<?php namespace Backup\Manager\Tasks\Database;
+<?php
 
-use Backup\Manager\Tasks\Task;
+namespace Backup\Manager\Tasks\Database;
+
 use Backup\Manager\Databases\Database;
-use Symfony\Component\Process\Process;
-use Backup\Manager\ShellProcessing\ShellProcessor;
 use Backup\Manager\ShellProcessing\ShellProcessFailed;
+use Backup\Manager\ShellProcessing\ShellProcessor;
+use Backup\Manager\Tasks\Task;
+use Symfony\Component\Process\Process;
 
 /**
- * Class DumpDatabase
- * @package Backup\Manager\Tasks\Database\Mysql
+ * Class DumpDatabase.
  */
 class DumpDatabase implements Task
 {
-    /** @var string */
     private string $outputPath;
-    /** @var ShellProcessor */
+
     private ShellProcessor $shellProcessor;
-    /** @var Database */
+
     private Database $database;
 
-    /**
-     * @param Database $database
-     * @param $outputPath
-     * @param ShellProcessor $shellProcessor
-     */
     public function __construct(Database $database, $outputPath, ShellProcessor $shellProcessor)
     {
         $this->outputPath = $outputPath;

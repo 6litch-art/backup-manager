@@ -2,10 +2,10 @@
 
 namespace spec\Backup\Manager\Tasks\Compression;
 
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
 use Backup\Manager\Compressors\Compressor;
 use Backup\Manager\ShellProcessing\ShellProcessor;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class DecompressFileSpec extends ObjectBehavior
 {

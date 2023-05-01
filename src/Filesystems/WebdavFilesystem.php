@@ -1,27 +1,27 @@
-<?php namespace Backup\Manager\Filesystems;
+<?php
+
+namespace Backup\Manager\Filesystems;
 
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\WebDAV\WebDAVAdapter;
 use Sabre\DAV\Client;
 
 /**
- * Class WebdavFilesystem
- * @package Backup\Manager\Filesystems
+ * Class WebdavFilesystem.
  */
 class WebdavFilesystem implements Filesystem
 {
     /**
      * Test fitness of visitor.
-     * @param $type
+     *
      * @return bool
      */
     public function handles($type)
     {
-        return strtolower($type ?? '') === 'webdav';
+        return 'webdav' === strtolower($type ?? '');
     }
 
     /**
-     * @param array $config
      * @return Flysystem
      */
     public function get(array $config)

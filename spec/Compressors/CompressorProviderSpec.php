@@ -4,7 +4,6 @@ namespace spec\Backup\Manager\Compressors;
 
 use Backup\Manager\Compressors\GzipCompressor;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class CompressorProviderSpec extends ObjectBehavior
 {
@@ -15,7 +14,7 @@ class CompressorProviderSpec extends ObjectBehavior
 
     public function it_should_provide_compressors_by_name()
     {
-        $this->add(new GzipCompressor);
+        $this->add(new GzipCompressor());
         $this->get('gzip')->shouldHaveType('Backup\Manager\Compressors\GzipCompressor');
     }
 

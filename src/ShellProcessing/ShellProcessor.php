@@ -1,27 +1,28 @@
-<?php namespace Backup\Manager\ShellProcessing;
+<?php
+
+namespace Backup\Manager\ShellProcessing;
 
 use Symfony\Component\Process\Process;
 
 /**
- * Class CommandProcessor
- * @package Backup\Manager
+ * Class CommandProcessor.
  */
 class ShellProcessor
 {
     /**
-     * @param Process $process
      * @return string
+     *
      * @throws ShellProcessFailed
      */
     public function process(Process $process)
     {
         $process->setTimeout(null);
         $process->run();
-        
-        if (! $process->isSuccessful()) {
+
+        if (!$process->isSuccessful()) {
             throw new ShellProcessFailed($process->getErrorOutput());
         }
-        
+
         return $process->getOutput();
     }
 }

@@ -1,29 +1,24 @@
-<?php namespace Backup\Manager\Tasks\Compression;
+<?php
 
-use Symfony\Component\Process\Process;
-use Backup\Manager\ShellProcessing\ShellProcessFailed;
-use Backup\Manager\Tasks\Task;
+namespace Backup\Manager\Tasks\Compression;
+
 use Backup\Manager\Compressors\Compressor;
+use Backup\Manager\ShellProcessing\ShellProcessFailed;
 use Backup\Manager\ShellProcessing\ShellProcessor;
+use Backup\Manager\Tasks\Task;
+use Symfony\Component\Process\Process;
 
 /**
- * Class DecompressFile
- * @package Backup\Manager\Tasks\Compression
+ * Class DecompressFile.
  */
 class DecompressFile implements Task
 {
-    /** @var string */
     private string $sourcePath;
-    /** @var ShellProcessor */
+
     private ShellProcessor $shellProcessor;
-    /** @var Compressor */
+
     private Compressor $compressor;
 
-    /**
-     * @param Compressor $compressor
-     * @param $sourcePath
-     * @param ShellProcessor $shellProcessor
-     */
     public function __construct(Compressor $compressor, $sourcePath, ShellProcessor $shellProcessor)
     {
         $this->sourcePath = $sourcePath;

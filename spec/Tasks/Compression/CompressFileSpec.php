@@ -1,9 +1,11 @@
-<?php namespace spec\Backup\Manager\Tasks\Compression;
+<?php
 
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
+namespace spec\Backup\Manager\Tasks\Compression;
+
 use Backup\Manager\Compressors\Compressor;
 use Backup\Manager\ShellProcessing\ShellProcessor;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class CompressFileSpec extends ObjectBehavior
 {

@@ -1,19 +1,17 @@
-<?php namespace Backup\Manager\Procedures;
+<?php
+
+namespace Backup\Manager\Procedures;
 
 use Backup\Manager\Tasks\Task;
 
 /**
- * Class Sequence
- * @package Backup\Manager\Procedures
+ * Class Sequence.
  */
 class Sequence
 {
     /** @var array|Task[] */
     private array $tasks = [];
 
-    /**
-     * @param Task $task
-     */
     public function add(Task $task)
     {
         $this->tasks[] = $task;
@@ -21,6 +19,7 @@ class Sequence
 
     /**
      * Run the procedure.
+     *
      * @return void
      */
     public function execute()

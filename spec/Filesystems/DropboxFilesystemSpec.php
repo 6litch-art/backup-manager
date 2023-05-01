@@ -3,7 +3,6 @@
 namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class DropboxFilesystemSpec extends ObjectBehavior
 {
@@ -33,8 +32,8 @@ class DropboxFilesystemSpec extends ObjectBehavior
     {
         return [
             'token' => 'token',
-            'app'   => 'app',
-            'root'  => 'some/directory/path',
+            'app' => 'app',
+            'root' => 'some/directory/path',
         ];
     }
 }

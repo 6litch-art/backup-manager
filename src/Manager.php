@@ -1,21 +1,19 @@
-<?php namespace Backup\Manager;
+<?php
 
-use Backup\Manager\Procedures;
-use Symfony\Component\Process\Process;
+namespace Backup\Manager;
+
+use Backup\Manager\Compressors\CompressorProvider;
 use Backup\Manager\Databases\DatabaseProvider;
 use Backup\Manager\Filesystems\FilesystemProvider;
-use Backup\Manager\Compressors\CompressorProvider;
 use Backup\Manager\ShellProcessing\ShellProcessor;
 
 /**
- * Class Manager
+ * Class Manager.
  *
  * This is a facade class that gives consumers access to the simple backup and restore procedures.
  * This class can be copied and namespaced into your project, renamed, added to, modified, etc.
  * Once you've done that, your application can interact with the backup manager in one place only
  * and the rest of the system will interact with the new Manager-like construct that you created.
- *
- * @package Backup\Manager
  */
 class Manager
 {
@@ -26,11 +24,6 @@ class Manager
     /** @var CompressorProvider */
     protected $compressors;
 
-    /**
-     * @param FilesystemProvider $filesystems
-     * @param DatabaseProvider $databases
-     * @param CompressorProvider $compressors
-     */
     public function __construct(FilesystemProvider $filesystems, DatabaseProvider $databases, CompressorProvider $compressors)
     {
         $this->filesystems = $filesystems;

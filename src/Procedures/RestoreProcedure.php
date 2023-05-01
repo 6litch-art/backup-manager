@@ -1,4 +1,6 @@
-<?php namespace Backup\Manager\Procedures;
+<?php
+
+namespace Backup\Manager\Procedures;
 
 use Backup\Manager\Compressors\CompressorTypeNotSupported;
 use Backup\Manager\Config\ConfigFieldNotFound;
@@ -8,16 +10,11 @@ use Backup\Manager\Filesystems\FilesystemTypeNotSupported;
 use Backup\Manager\Tasks;
 
 /**
- * Class RestoreProcedure
- * @package Backup\Manager\Procedures
+ * Class RestoreProcedure.
  */
 class RestoreProcedure extends Procedure
 {
     /**
-     * @param string $sourceType
-     * @param string $sourcePath
-     * @param string $databaseName
-     * @param string|null $compression
      * @throws FilesystemTypeNotSupported
      * @throws ConfigFieldNotFound
      * @throws CompressorTypeNotSupported
@@ -26,11 +23,11 @@ class RestoreProcedure extends Procedure
      */
     public function run(string $sourceType, string $sourcePath, string $databaseName, string $compression = null)
     {
-        $sequence = new Sequence;
+        $sequence = new Sequence();
 
         // begin the life of a new working file
         $localFilesystem = $this->filesystems->get('local');
-        $workingFile = $this->getWorkingFile('local', uniqid() . basename($sourcePath));
+        $workingFile = $this->getWorkingFile('local', uniqid().basename($sourcePath));
 
         // download or retrieve the archived backup file
         $sequence->add(new Tasks\Storage\TransferFile(

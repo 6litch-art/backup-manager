@@ -5,7 +5,6 @@ namespace spec\Backup\Manager\Databases;
 use Backup\Manager\Config\Config;
 use Backup\Manager\Databases\MysqlDatabase;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class DatabaseProviderSpec extends ObjectBehavior
 {
@@ -21,7 +20,7 @@ class DatabaseProviderSpec extends ObjectBehavior
 
     public function it_should_provide_requested_databases_by_name()
     {
-        $this->add(new MysqlDatabase);
+        $this->add(new MysqlDatabase());
         $this->get('development')->shouldHaveType('Backup\Manager\Databases\MysqlDatabase');
     }
 

@@ -1,8 +1,9 @@
-<?php namespace Backup\Manager\Tasks;
+<?php
+
+namespace Backup\Manager\Tasks;
 
 /**
- * Interface Task
- * @package Backup\Manager\Tasks
+ * Interface Task.
  */
 interface Task
 {

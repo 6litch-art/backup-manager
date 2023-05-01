@@ -7,5 +7,5 @@ $manager
     ->makeBackup()
     ->run('development', [
         new Destination('local', 'test/backup.sql'),
-        new Destination('s3', 'test/dump.sql')
+        new Destination('s3', 'test/dump.sql'),
     ], 'gzip');

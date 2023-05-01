@@ -8,7 +8,7 @@ return [
         'user' => 'root',
         'pass' => 'password',
         'database' => 'test',
-        'singleTransaction' => false
+        'singleTransaction' => false,
     ],
     'production' => [
         'type' => 'postgresql',

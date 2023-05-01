@@ -5,7 +5,6 @@ namespace spec\Backup\Manager\Filesystems;
 use Backup\Manager\Config\Config;
 use Backup\Manager\Filesystems\LocalFilesystem;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FilesystemProviderSpec extends ObjectBehavior
 {
@@ -21,7 +20,7 @@ class FilesystemProviderSpec extends ObjectBehavior
 
     public function it_should_provide_requested_filesystems_by_their_names()
     {
-        $this->add(new LocalFilesystem);
+        $this->add(new LocalFilesystem());
         $this->get('local')->shouldHaveType('League\Flysystem\Filesystem');
     }
 

@@ -3,7 +3,6 @@
 namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class Awss3FilesystemSpec extends ObjectBehavior
 {
@@ -31,12 +30,12 @@ class Awss3FilesystemSpec extends ObjectBehavior
     public function getConfig()
     {
         return [
-            'key'    => 'key',
+            'key' => 'key',
             'secret' => 'secret',
             'region' => 'us-east-1',
             'bucket' => 'bucket',
-            'root'   => 'prefix',
-            'version' => 'latest'
+            'root' => 'prefix',
+            'version' => 'latest',
         ];
     }
 }

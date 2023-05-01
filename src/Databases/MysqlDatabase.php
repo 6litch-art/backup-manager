@@ -1,45 +1,40 @@
-<?php namespace Backup\Manager\Databases;
+<?php
+
+namespace Backup\Manager\Databases;
 
 /**
- * Class MysqlDatabase
- * @package Backup\Manager\Databases
+ * Class MysqlDatabase.
  */
 class MysqlDatabase implements Database
 {
-    /** @var array */
     private array $config;
 
     /**
-     * @param $type
      * @return bool
      */
     public function handles($type)
     {
-        return strtolower($type ?? '') == 'mysql' || strtolower($type ?? '') == 'pdo_mysql';
+        return 'mysql' == strtolower($type ?? '') || 'pdo_mysql' == strtolower($type ?? '');
     }
 
-    /**
-     * @param array $config
-     */
     public function setConfig(array $config)
     {
         $this->config = $config;
     }
 
     /**
-     * @param $inputPath
      * @return string
      */
     public function getDumpCommandLine($inputPath)
     {
         $extras = [];
-        if (array_key_exists('singleTransaction', $this->config) && $this->config['singleTransaction'] === true) {
+        if (array_key_exists('singleTransaction', $this->config) && true === $this->config['singleTransaction']) {
             $extras[] = '--single-transaction';
         }
         if (array_key_exists('ignoreTables', $this->config)) {
             $extras[] = $this->getIgnoreTableParameter();
         }
-        if (array_key_exists('ssl', $this->config) && $this->config['ssl'] === true) {
+        if (array_key_exists('ssl', $this->config) && true === $this->config['ssl']) {
             $extras[] = '--ssl';
         }
         if (array_key_exists('extraParams', $this->config) && $this->config['extraParams']) {
@@ -55,7 +50,8 @@ class MysqlDatabase implements Database
             }
         }
 
-        $command = 'mysqldump --column-statistics=0 --routines ' . implode(' ', $extras) . '%s %s > %s';
+        $command = 'mysqldump --column-statistics=0 --routines '.implode(' ', $extras).'%s %s > %s';
+
         return sprintf(
             $command,
             $params,
@@ -65,13 +61,12 @@ class MysqlDatabase implements Database
     }
 
     /**
-     * @param $outputPath
      * @return string
      */
     public function getRestoreCommandLine($outputPath)
     {
         $extras = [];
-        if (array_key_exists('ssl', $this->config) && $this->config['ssl'] === true) {
+        if (array_key_exists('ssl', $this->config) && true === $this->config['ssl']) {
             $extras[] = '--ssl';
         }
 
@@ -85,7 +80,7 @@ class MysqlDatabase implements Database
         }
 
         return sprintf(
-            'mysql%s ' . implode(' ', $extras) . ' %s -e "source %s"',
+            'mysql%s '.implode(' ', $extras).' %s -e "source %s"',
             $params,
             escapeshellarg($this->config['database']),
             $outputPath
@@ -97,13 +92,13 @@ class MysqlDatabase implements Database
      */
     public function getIgnoreTableParameter()
     {
-        if (!is_array($this->config['ignoreTables']) || count($this->config['ignoreTables']) === 0) {
+        if (!is_array($this->config['ignoreTables']) || 0 === count($this->config['ignoreTables'])) {
             return '';
         }
 
         $db = $this->config['database'];
         $ignoreTables = array_map(function ($table) use ($db) {
-            return $db . '.' . $table;
+            return $db.'.'.$table;
         }, $this->config['ignoreTables']);
 
         $commands = [];

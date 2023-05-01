@@ -1,25 +1,23 @@
-<?php namespace Backup\Manager\Compressors;
+<?php
+
+namespace Backup\Manager\Compressors;
 
 /**
- * Class CompressorProvider
- * @package Backup\Manager\Compressors
+ * Class CompressorProvider.
  */
 class CompressorProvider
 {
     /** @var array|Compressor[] */
     private array $compressors = [];
 
-    /**
-     * @param Compressor $compressor
-     */
     public function add(Compressor $compressor)
     {
         $this->compressors[] = $compressor;
     }
 
     /**
-     * @param $name
      * @return Compressor
+     *
      * @throws CompressorTypeNotSupported
      */
     public function get($name)
@@ -29,6 +27,6 @@ class CompressorProvider
                 return $compressor;
             }
         }
-        throw new CompressorTypeNotSupported("The requested compressor type `" . $name . "` is not currently supported.");
+        throw new CompressorTypeNotSupported('The requested compressor type `'.$name.'` is not currently supported.');
     }
 }
