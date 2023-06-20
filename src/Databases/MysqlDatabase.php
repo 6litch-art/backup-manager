@@ -54,14 +54,12 @@ class MysqlDatabase implements Database
             }
         }
 
-        $command = 'mysqldump --column-statistics=0 --routines ' . implode(' ', $extras) . '%s %s > %s';
+        // Get default socket file
+        $socket = ini_get("pdo_mysql.default_socket") ?? ini_get("mysqli.default_socket") ?? "";
+        $socket = $socket ? '--socket="'.$socket.'"' : "";
 
-        return sprintf(
-            $command,
-            $params,
-            escapeshellarg($this->config['database']),
-            escapeshellarg($inputPath)
-        );
+        $command = 'mysqldump '.$socket.' --column-statistics=0 --routines ' . implode(' ', $extras) . '%s %s > %s';
+        return sprintf($command, $params, escapeshellarg($this->config['database']), escapeshellarg($inputPath));
     }
 
     /**

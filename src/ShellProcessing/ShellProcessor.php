@@ -18,7 +18,6 @@ class ShellProcessor
     {
         $process->setTimeout(null);
         $process->run();
-
         if (!$process->isSuccessful()) {
             throw new ShellProcessFailed($process->getErrorOutput());
         }
