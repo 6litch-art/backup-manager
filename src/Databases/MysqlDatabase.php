@@ -58,7 +58,7 @@ class MysqlDatabase implements Database
         $socket = ini_get("pdo_mysql.default_socket") ?? ini_get("mysqli.default_socket") ?? "";
         $socket = $socket ? '--socket="'.$socket.'"' : "";
 
-        $command = 'mysqldump '.$socket.' --column-statistics=0 --routines ' . implode(' ', $extras) . '%s %s > %s';
+        $command = 'mysqldump '.$socket.' --routines ' . implode(' ', $extras) . '%s %s > %s';
         return sprintf($command, $params, escapeshellarg($this->config['database']), escapeshellarg($inputPath));
     }
 
