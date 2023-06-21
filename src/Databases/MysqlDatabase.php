@@ -31,6 +31,16 @@ class MysqlDatabase implements Database
      */
     public function getDumpCommandLine($inputPath)
     {
+        // Check if column statistics option is available
+        list($_, $ret) = [[], false];
+        exec("mysqldump --column-statistics=0 --version &> /dev/null", $_, $ret);
+        $this->config["ignoreColumnStatistics"] ??= true;
+        $this->config["ignoreColumnStatistics"] = ($ret == 0) && $this->config["ignoreColumnStatistics"];
+        
+        // Get default socket file
+        $this->config["socket"] ??= ini_get("pdo_mysql.default_socket") ?? ini_get("mysqli.default_socket") ?? "";
+
+        // Compute extra parameters
         $extras = [];
         if (array_key_exists('singleTransaction', $this->config) && true === $this->config['singleTransaction']) {
             $extras[] = '--single-transaction';
@@ -38,8 +48,14 @@ class MysqlDatabase implements Database
         if (array_key_exists('ignoreTables', $this->config)) {
             $extras[] = $this->getIgnoreTableParameter();
         }
+        if (array_key_exists('ignoreColumnStatistics', $this->config)) {
+            $extras[] = '--column-statistics=0';
+        }
         if (array_key_exists('ssl', $this->config) && true === $this->config['ssl']) {
             $extras[] = '--ssl';
+        }
+        if (array_key_exists('socket', $this->config) && !empty($this->config["socket"])) {
+            $extras[] = '--socket=' . $this->config["socket"];
         }
         if (array_key_exists('extraParams', $this->config) && $this->config['extraParams']) {
             $extras[] = $this->config['extraParams'];
@@ -54,11 +70,7 @@ class MysqlDatabase implements Database
             }
         }
 
-        // Get default socket file
-        $socket = ini_get("pdo_mysql.default_socket") ?? ini_get("mysqli.default_socket") ?? "";
-        $socket = $socket ? '--socket="'.$socket.'"' : "";
-
-        $command = 'mysqldump '.$socket.' --routines ' . implode(' ', $extras) . '%s %s > %s';
+        $command = 'mysqldump --routines ' . implode(' ', $extras) . ' %s %s > %s';
         return sprintf($command, $params, escapeshellarg($this->config['database']), escapeshellarg($inputPath));
     }
 
