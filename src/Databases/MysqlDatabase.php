@@ -33,10 +33,10 @@ class MysqlDatabase implements Database
     {
         // Check if column statistics option is available
         list($_, $ret) = [[], false];
-        exec("mysqldump --column-statistics=0 --version &> /dev/null", $_, $ret);
+        exec("mysqldump --column-statistics=0 --version 2> /dev/null", $_, $ret);
         $this->config["ignoreColumnStatistics"] ??= true;
         $this->config["ignoreColumnStatistics"] = ($ret == 0) && $this->config["ignoreColumnStatistics"];
-        
+
         // Get default socket file
         $this->config["socket"] ??= ini_get("pdo_mysql.default_socket") ?? ini_get("mysqli.default_socket") ?? "";
 
@@ -45,10 +45,10 @@ class MysqlDatabase implements Database
         if (array_key_exists('singleTransaction', $this->config) && true === $this->config['singleTransaction']) {
             $extras[] = '--single-transaction';
         }
-        if (array_key_exists('ignoreTables', $this->config)) {
+        if (array_key_exists('ignoreTables', $this->config) && true === $this->config["ignoreTables"]) {
             $extras[] = $this->getIgnoreTableParameter();
         }
-        if (array_key_exists('ignoreColumnStatistics', $this->config)) {
+        if (array_key_exists('ignoreColumnStatistics', $this->config) && true === $this->config["ignoreColumnStatistics"]) {
             $extras[] = '--column-statistics=0';
         }
         if (array_key_exists('ssl', $this->config) && true === $this->config['ssl']) {
