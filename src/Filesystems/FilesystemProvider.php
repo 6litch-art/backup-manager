@@ -26,6 +26,27 @@ class FilesystemProvider
     }
 
     /**
+     * @param null $key
+     *
+     * @return mixed
+     *
+     * @throws ConfigNotFoundForConnection
+     * @throws ConfigFieldNotFound
+     */
+    public function getConfig($name, $key = null)
+    {
+        return $this->config->get($name, $key);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAvailableProviders()
+    {
+        return array_keys($this->config->getItems());
+    }
+
+    /**
      * @return \League\Flysystem\Filesystem
      *
      * @throws FilesystemTypeNotSupported
@@ -45,24 +66,44 @@ class FilesystemProvider
         throw new FilesystemTypeNotSupported('The requested filesystem type `' . $type . '` is not currently supported.');
     }
 
+
     /**
-     * @param null $key
+     * @return \League\Flysystem\Filesystem
      *
-     * @return mixed
-     *
+     * @throws FilesystemTypeNotSupported
      * @throws ConfigNotFoundForConnection
      * @throws ConfigFieldNotFound
      */
-    public function getConfig($name, $key = null)
+    public function lastModified($name)
     {
-        return $this->config->get($name, $key);
+        $type = $this->getConfig($name, 'type');
+
+        foreach ($this->filesystems as $filesystem) {
+            if ($filesystem->handles($type)) {
+                return $filesystem->lastModified($this->config->get($name));
+            }
+        }
+
+        throw new FilesystemTypeNotSupported('The requested filesystem type `' . $type . '` is not currently supported.');
     }
 
     /**
-     * @return array
+     * @return \League\Flysystem\Filesystem
+     *
+     * @throws FilesystemTypeNotSupported
+     * @throws ConfigNotFoundForConnection
+     * @throws ConfigFieldNotFound
      */
-    public function getAvailableProviders()
+    public function has($name)
     {
-        return array_keys($this->config->getItems());
+        $type = $this->getConfig($name, 'type');
+
+        foreach ($this->filesystems as $filesystem) {
+            if ($filesystem->handles($type)) {
+                return $filesystem->has($this->config->get($name));
+            }
+        }
+
+        throw new FilesystemTypeNotSupported('The requested filesystem type `' . $type . '` is not currently supported.');
     }
 }
