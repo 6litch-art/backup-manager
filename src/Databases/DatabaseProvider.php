@@ -38,7 +38,6 @@ class DatabaseProvider
         foreach ($this->databases as $database) {
             if ($database->handles($type)) {
                 $database->setConfig($this->config->get($name));
-
                 return $database;
             }
         }

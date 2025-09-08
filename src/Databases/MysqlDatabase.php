@@ -14,7 +14,17 @@ class MysqlDatabase implements Database
      */
     public function handles($type)
     {
-        return 'mysql' == strtolower($type ?? '') || 'pdo_mysql' == strtolower($type ?? '');
+        $isMysql = 'mysql' == strtolower($type ?? '') || 'pdo_mysql' == strtolower($type ?? '');
+        if (!$isMysql) return false;
+
+        list($_, $ret) = [[], false];
+        exec("mysqldump --version", $_, $ret);
+        $mysqldump = $_[0] ?? '';
+        
+        if($isMysql && \str_contains($mysqldump, "MariaDB"))
+            return false;
+
+        return true;
     }
 
     /**
@@ -33,7 +43,8 @@ class MysqlDatabase implements Database
     {
         // Check if column statistics option is available
         list($_, $ret) = [[], false];
-        exec("mysqldump --column-statistics=0 --version 2> /dev/null", $_, $ret);
+        //exec("mysqldump --column-statistics=0 --version 2> /dev/null", $_, $ret);
+        exec("mysqldump --version 2> /dev/null", $_, $ret);
         $this->config["ignoreColumnStatistics"] ??= true;
         $this->config["ignoreColumnStatistics"] = ($ret == 0) && $this->config["ignoreColumnStatistics"];
 
@@ -48,9 +59,9 @@ class MysqlDatabase implements Database
         if (array_key_exists('ignoreTables', $this->config) && true === $this->config["ignoreTables"]) {
             $extras[] = $this->getIgnoreTableParameter();
         }
-        if (array_key_exists('ignoreColumnStatistics', $this->config) && true === $this->config["ignoreColumnStatistics"]) {
-            $extras[] = '--column-statistics=0';
-        }
+//        if (array_key_exists('ignoreColumnStatistics', $this->config) && true === $this->config["ignoreColumnStatistics"]) {
+//           $extras[] = '--column-statistics=0';
+//        }
         if (array_key_exists('ssl', $this->config) && true === $this->config['ssl']) {
             $extras[] = '--ssl';
         }
