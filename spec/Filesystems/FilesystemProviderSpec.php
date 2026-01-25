@@ -6,9 +6,6 @@ use Backup\Manager\Config\Config;
 use Backup\Manager\Filesystems\LocalFilesystem;
 use PhpSpec\ObjectBehavior;
 
-/**
- *
- */
 class FilesystemProviderSpec extends ObjectBehavior
 {
     public function let()

@@ -5,9 +5,6 @@ namespace spec\Backup\Manager\Filesystems;
 use PhpSpec\ObjectBehavior;
 use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
 
-/**
- *
- */
 class GcsFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()

@@ -5,9 +5,6 @@ namespace spec\Backup\Manager\Filesystems;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- *
- */
 class LocalFilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()

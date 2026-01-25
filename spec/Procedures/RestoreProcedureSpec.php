@@ -10,9 +10,6 @@ use Backup\Manager\ShellProcessing\ShellProcessor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- *
- */
 class RestoreProcedureSpec extends ObjectBehavior
 {
     public function it_is_initializable(FilesystemProvider $filesystemProvider, DatabaseProvider $databaseProvider, CompressorProvider $compressorProvider, ShellProcessor $shellProcessor, Sequence $sequence)

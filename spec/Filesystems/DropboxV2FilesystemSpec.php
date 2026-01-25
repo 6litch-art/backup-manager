@@ -4,9 +4,6 @@ namespace spec\Backup\Manager\Filesystems;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- *
- */
 class DropboxV2FilesystemSpec extends ObjectBehavior
 {
     public function it_is_initializable()

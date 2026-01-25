@@ -9,9 +9,6 @@ use GuzzleHttp\Psr7\Response;
 use PhpSpec\Exception\Example\SkippingException;
 use PhpSpec\ObjectBehavior;
 
-/**
- *
- */
 class BackblazeFilesystemSpec extends ObjectBehavior
 {
     public function let(): void

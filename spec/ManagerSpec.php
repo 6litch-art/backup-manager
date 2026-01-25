@@ -8,9 +8,6 @@ use Backup\Manager\Filesystems\FilesystemProvider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- *
- */
 class ManagerSpec extends ObjectBehavior
 {
     public function let(FilesystemProvider $filesystems, DatabaseProvider $databases, CompressorProvider $compressors)

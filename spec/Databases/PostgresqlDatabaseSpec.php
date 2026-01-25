@@ -6,9 +6,6 @@ use Backup\Manager\Config\Config;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- *
- */
 class PostgresqlDatabaseSpec extends ObjectBehavior
 {
     public function it_is_initializable()

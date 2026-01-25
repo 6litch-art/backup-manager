@@ -6,9 +6,6 @@ use Backup\Manager\Config\Config;
 use Backup\Manager\Databases\MysqlDatabase;
 use PhpSpec\ObjectBehavior;
 
-/**
- *
- */
 class DatabaseProviderSpec extends ObjectBehavior
 {
     public function let()

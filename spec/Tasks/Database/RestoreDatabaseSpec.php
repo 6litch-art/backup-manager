@@ -7,9 +7,6 @@ use Backup\Manager\ShellProcessing\ShellProcessor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- *
- */
 class RestoreDatabaseSpec extends ObjectBehavior
 {
     public function it_is_initializable(Database $database, ShellProcessor $shellProcessor)

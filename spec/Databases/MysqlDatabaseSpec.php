@@ -9,9 +9,6 @@ use Backup\Manager\Config\ConfigNotFoundForConnection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- *
- */
 class MysqlDatabaseSpec extends ObjectBehavior
 {
     public function it_is_initializable()

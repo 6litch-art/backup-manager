@@ -2,9 +2,6 @@
 
 namespace Backup\Manager\Filesystems;
 
-/**
- *
- */
 final class Destination
 {
     /** @var string */
