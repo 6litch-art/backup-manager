@@ -2,138 +2,197 @@
 
 namespace Backup\Manager\Databases;
 
-/**
- * Class MysqlDatabase.
- */
 class MysqlDatabase implements Database
 {
-    private array $config;
+    private array $config = [];
+    private string $clientVersion = '0.0.0';
+    private string $serverVersion = '0.0.0';
+    private bool $supportsSslMode = false;
+    private bool $supportsColumnStats = false;
 
-    /**
-     * @return bool
-     */
-    public function handles($type)
+    public function handles(string $driver, ?string $serverVersion = null): bool
     {
-        $isMysql = 'mysql' == strtolower($type ?? '') || 'pdo_mysql' == strtolower($type ?? '');
-        if (!$isMysql) return false;
-
-        list($_, $ret) = [[], false];
-        exec("mysqldump --version", $_, $ret);
-        $mysqldump = $_[0] ?? '';
-        
-        if($isMysql && \str_contains($mysqldump, "MariaDB"))
+        $isMysql = in_array(strtolower($driver ?? ''), ['mysql', 'pdo_mysql'], true);
+        if (!$isMysql) {
             return false;
+        }
+
+        exec('mysqldump --version 2>&1', $output, $code);
+        if ($code !== 0 || empty($output[0])) {
+            return false;
+        }
+
+        if (!str_contains(strtolower($serverVersion), 'mariadb')) {
+
+            $this->clientVersion = $this->extractVersion($output[0]);
+            $this->serverVersion = $serverVersion ?? $this->serverVersion;
+            $this->supportsSslMode = version_compare($this->clientVersion, '8', '>=');
+            return $this->isVersionCompatible($this->serverVersion);
+        }
+
+        return false;
+    }
+
+    public function isVersionCompatible(?string $serverVersion = null): bool
+    {
+        if ($serverVersion === null) {
+            return true;
+        }
+
+        // Reject if server is MariaDB and client is MySQL
+        if (stripos($serverVersion, 'mariadb') !== false) {
+            return false;
+        }
+
+        // Reject if server is MySQL 8+ and client is older than 8
+        if (preg_match('/([0-9]+)\./', $serverVersion, $matches)) {
+            $serverMajor = (int)$matches[1];
+            $clientMajor = (int)explode('.', $this->clientVersion)[0];
+            if ($serverMajor >= 8 && $clientMajor < 8) {
+                return false;
+            }
+        }
 
         return true;
     }
 
-    /**
-     * @param array $config
-     * @return void|null
-     */
-    public function setConfig(array $config)
+    public function setConfig(array $config): void
     {
         $this->config = $config;
     }
 
-    /**
-     * @return string
-     */
-    public function getDumpCommandLine($inputPath)
+    public function getDumpCommandLine($outputPath): string
     {
-        // Check if column statistics option is available
-        list($_, $ret) = [[], false];
-        //exec("mysqldump --column-statistics=0 --version 2> /dev/null", $_, $ret);
-        exec("mysqldump --version 2> /dev/null", $_, $ret);
-        $this->config["ignoreColumnStatistics"] ??= true;
-        $this->config["ignoreColumnStatistics"] = ($ret == 0) && $this->config["ignoreColumnStatistics"];
+        $extras = ['--routines'];
 
-        // Get default socket file
-        $this->config["socket"] ??= ini_get("pdo_mysql.default_socket") ?? ini_get("mysqli.default_socket") ?? "";
-
-        // Compute extra parameters
-        $extras = [];
-        if (array_key_exists('singleTransaction', $this->config) && true === $this->config['singleTransaction']) {
+        if (!empty($this->config['singleTransaction'])) {
             $extras[] = '--single-transaction';
         }
-        if (array_key_exists('ignoreTables', $this->config) && true === $this->config["ignoreTables"]) {
+
+        if ($this->supportsColumnStats) {
+            $extras[] = '--column-statistics=0';
+        }
+
+        $extras = array_merge($extras, $this->buildSslOptions());
+
+        if (!empty($this->config['ignoreTables'])) {
             $extras[] = $this->getIgnoreTableParameter();
         }
-//        if (array_key_exists('ignoreColumnStatistics', $this->config) && true === $this->config["ignoreColumnStatistics"]) {
-//           $extras[] = '--column-statistics=0';
-//        }
-        if (array_key_exists('ssl', $this->config) && true === $this->config['ssl']) {
-            $extras[] = '--ssl';
-        }
-        if (array_key_exists('socket', $this->config) && !empty($this->config["socket"])) {
-            $extras[] = '--socket=' . $this->config["socket"];
-        }
-        if (array_key_exists('extraParams', $this->config) && $this->config['extraParams']) {
+
+        if (!empty($this->config['extraParams'])) {
             $extras[] = $this->config['extraParams'];
         }
 
-        // Prepare a "params" string from our config
-        $params = '';
-        $keys = ['host' => 'host', 'port' => 'port', 'user' => 'user', 'pass' => 'password'];
-        foreach ($keys as $key => $mysqlParam) {
-            if (!empty($this->config[$key])) {
-                $params .= sprintf(' --%s=%s', $mysqlParam, escapeshellarg($this->config[$key]));
-            }
-        }
+        $params = $this->buildConnectionParams();
 
-        $command = 'mysqldump --routines ' . implode(' ', $extras) . ' %s %s > %s';
-        return sprintf($command, $params, escapeshellarg($this->config['database']), escapeshellarg($inputPath));
-    }
-
-    /**
-     * @return string
-     */
-    public function getRestoreCommandLine($outputPath)
-    {
-        $extras = [];
-        if (array_key_exists('ssl', $this->config) && true === $this->config['ssl']) {
-            $extras[] = '--ssl';
-        }
-
-        // Prepare a "params" string from our config
-        $params = '';
-        $keys = ['host' => 'host', 'port' => 'port', 'user' => 'user', 'pass' => 'password'];
-        foreach ($keys as $key => $mysqlParam) {
-            if (!empty($this->config[$key])) {
-                $params .= sprintf(' --%s=%s', $mysqlParam, escapeshellarg($this->config[$key]));
-            }
-        }
+        dump($this->config);
+        
+        dump(
+            sprintf(
+                'mysqldump %s %s %s > %s',
+                implode(' ', $extras),
+                $params,
+                escapeshellarg($this->config['dbname']),
+                escapeshellarg($outputPath)
+            )
+        );
 
         return sprintf(
-            'mysql%s ' . implode(' ', $extras) . ' %s -e "source %s"',
+            'mysqldump %s %s %s > %s',
+            implode(' ', $extras),
             $params,
-            escapeshellarg($this->config['database']),
-            $outputPath
+            escapeshellarg($this->config['dbname']),
+            escapeshellarg($outputPath)
         );
     }
 
-    /**
-     * @return string
-     */
-    public function getIgnoreTableParameter()
+    public function getRestoreCommandLine($inputPath): string
     {
-        if (!is_array($this->config['ignoreTables']) || 0 === count($this->config['ignoreTables'])) {
+        $extras = $this->buildSslOptions();
+        $params = $this->buildConnectionParams();
+
+        return sprintf(
+            'mysql %s %s %s -e "source %s"',
+            implode(' ', $extras),
+            $params,
+            escapeshellarg($this->config['dbname']),
+            escapeshellarg($inputPath)
+        );
+    }
+
+    private function buildSslOptions(): array
+    {
+        $options = [];
+
+        if (!empty($this->config['sslmode']) && $this->supportsSslMode) {
+            $options[] = '--ssl-mode=' . escapeshellarg($this->config['sslmode']);
+        }
+
+        if (!empty($this->config['sslca'])) {
+            $options[] = '--ssl-ca=' . escapeshellarg($this->config['sslca']);
+        }
+
+        if (!empty($this->config['sslcert'])) {
+            $options[] = '--ssl-cert=' . escapeshellarg($this->config['sslcert']);
+        }
+
+        if (!empty($this->config['sslkey'])) {
+            $options[] = '--ssl-key=' . escapeshellarg($this->config['sslkey']);
+        }
+
+        return $options;
+    }
+
+    private function buildConnectionParams(): string
+    {
+        $parts = [];
+
+        $map = [
+            'host' => 'host',
+            'port' => 'port',
+            'user' => 'user',
+            'password' => 'password',
+        ];
+
+        foreach ($map as $key => $cli) {
+            if (!empty($this->config[$key])) {
+                $parts[] = sprintf('--%s=%s', $cli, escapeshellarg($this->config[$key]));
+            }
+        }
+
+        if (!empty($this->config['socket'])) {
+            $parts[] = '--socket=' . escapeshellarg($this->config['socket']);
+        }
+
+        return implode(' ', array_filter($parts));
+    }
+
+    public function getIgnoreTableParameter(): string
+    {
+        if (empty($this->config['ignoreTables']) || !is_array($this->config['ignoreTables'])) {
             return '';
         }
 
-        $db = $this->config['database'];
-        $ignoreTables = array_map(function ($table) use ($db) {
-            return $db . '.' . $table;
-        }, $this->config['ignoreTables']);
-
+        $db = $this->config['dbname'];
         $commands = [];
-        foreach ($ignoreTables as $ignoreTable) {
-            $commands[] = sprintf(
-                '--ignore-table=%s',
-                escapeshellarg($ignoreTable)
-            );
+
+        foreach ($this->config['ignoreTables'] as $table) {
+            $commands[] = '--ignore-table=' . escapeshellarg($db . '.' . $table);
         }
 
         return implode(' ', $commands);
+    }
+
+    private function extractVersion(string $string): string
+    {
+        if (preg_match('/Distrib ([0-9\.]+)/', $string, $matches)) {
+            return $matches[1];
+        }
+
+        if (preg_match('/Ver ([0-9\.]+)/', $string, $matches)) {
+            return $matches[1];
+        }
+
+        return '0.0.0';
     }
 }

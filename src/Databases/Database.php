@@ -10,7 +10,7 @@ interface Database
     /**
      * @return bool
      */
-    public function handles($type);
+    public function handles(string $driver, ?string $server_version = null): bool;
 
     /**
      * @return null

@@ -34,14 +34,17 @@ class DatabaseProvider
      */
     public function get($name)
     {
-        $type = $this->config->get($name, 'type');
+        $driver = $this->config->get($name, 'driver');
+        $serverVersion = $this->config->get($name, 'serverVersion', null);
+       
         foreach ($this->databases as $database) {
-            if ($database->handles($type)) {
+            if ($database->handles($driver, $serverVersion)) {
                 $database->setConfig($this->config->get($name));
                 return $database;
             }
         }
-        throw new DatabaseTypeNotSupported('The requested database type `' . $type . '` is not currently supported.');
+        
+        throw new DatabaseTypeNotSupported('The requested database driver `' . $driver . '` is not currently supported.');
     }
 
     /**

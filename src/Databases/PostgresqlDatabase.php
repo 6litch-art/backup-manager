@@ -12,9 +12,9 @@ class PostgresqlDatabase implements Database
     /**
      * @return bool
      */
-    public function handles($type)
+    public function handles(string $driver, ?string $server_version = null): bool
     {
-        return in_array(strtolower($type ?? ''), ['postgresql', 'postgres', 'pgsql']);
+        return in_array(strtolower($driver ?? ''), ['postgresql', 'postgres', 'pgsql']);
     }
 
     /**
@@ -37,7 +37,7 @@ class PostgresqlDatabase implements Database
             escapeshellarg($this->config['host']),
             escapeshellarg($this->config['port']),
             escapeshellarg($this->config['user']),
-            escapeshellarg($this->config['database']),
+            escapeshellarg($this->config['dbname']),
             escapeshellarg($inputPath)
         );
     }
@@ -53,7 +53,7 @@ class PostgresqlDatabase implements Database
             escapeshellarg($this->config['host']),
             escapeshellarg($this->config['port']),
             escapeshellarg($this->config['user']),
-            escapeshellarg($this->config['database']),
+            escapeshellarg($this->config['dbname']),
             escapeshellarg($outputPath)
         );
     }
