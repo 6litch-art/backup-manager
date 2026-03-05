@@ -85,18 +85,6 @@ class MysqlDatabase implements Database
 
         $params = $this->buildConnectionParams();
 
-        dump($this->config);
-        
-        dump(
-            sprintf(
-                'mysqldump %s %s %s > %s',
-                implode(' ', $extras),
-                $params,
-                escapeshellarg($this->config['dbname']),
-                escapeshellarg($outputPath)
-            )
-        );
-
         return sprintf(
             'mysqldump %s %s %s > %s',
             implode(' ', $extras),
