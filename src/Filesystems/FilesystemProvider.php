@@ -39,11 +39,28 @@ class FilesystemProvider
     }
 
     /**
+     * Only the storages whose type is actually handled by a registered
+     * Filesystem are returned — callers (e.g. TimeMachine::getStorageList())
+     * iterate this list and eagerly resolve every entry, so a single
+     * app-level storage of an unsupported type (e.g. an S3 storage used
+     * elsewhere in the app, unrelated to backups) must not break every
+     * backup/restore operation.
+     *
      * @return array
      */
     public function getAvailableProviders()
     {
-        return array_keys($this->config->getItems());
+        return array_keys(array_filter(
+            $this->config->getItems(),
+            function ($config) {
+                foreach ($this->filesystems as $filesystem) {
+                    if ($filesystem->handles($config['type'] ?? null)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        ));
     }
 
     /**
