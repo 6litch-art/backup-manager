@@ -8,6 +8,11 @@ class MysqlDatabase implements Database
     private string $clientVersion = '0.0.0';
     private string $serverVersion = '0.0.0';
     private bool $supportsSslMode = false;
+    // dump (mysqldump) and restore (mysql) are separate binaries and can be
+    // different client flavors on the same system (e.g. a real MySQL
+    // mysqldump alongside a MariaDB-flavored `mysql` CLI) — MariaDB's
+    // client does not understand --ssl-mode, so each is tracked on its own.
+    private bool $supportsSslModeRestore = false;
     private bool $supportsColumnStats = false;
 
     public function handles(string $driver, ?string $serverVersion = null): bool
@@ -20,6 +25,11 @@ class MysqlDatabase implements Database
         exec('mysqldump --version 2>&1', $output, $code);
         if ($code !== 0 || empty($output[0])) {
             return false;
+        }
+
+        exec('mysql --version 2>&1', $restoreOutput, $restoreCode);
+        if ($restoreCode === 0 && !empty($restoreOutput[0]) && !str_contains(strtolower($restoreOutput[0]), 'mariadb')) {
+            $this->supportsSslModeRestore = version_compare($this->extractVersion($restoreOutput[0]), '8', '>=');
         }
 
         if (!str_contains(strtolower($serverVersion), 'mariadb')) {
@@ -96,24 +106,36 @@ class MysqlDatabase implements Database
 
     public function getRestoreCommandLine($inputPath): string
     {
-        $extras = $this->buildSslOptions();
+        $extras = $this->buildSslOptions(true);
         $params = $this->buildConnectionParams();
 
+        // mysql's `source` meta-command takes the rest of the line as a
+        // literal filename — it does not shell-unquote it. Quoting the path
+        // itself (as the previous version did) embeds the quote characters
+        // into the filename mysql tries to open. Quote the whole `-e` value
+        // once instead, so mysql receives a clean, unquoted path.
         return sprintf(
-            'mysql %s %s %s -e "source %s"',
+            'mysql %s %s %s -e %s',
             implode(' ', $extras),
             $params,
             escapeshellarg($this->config['dbname']),
-            escapeshellarg($inputPath)
+            escapeshellarg('source ' . $inputPath)
         );
     }
 
-    private function buildSslOptions(): array
+    private function buildSslOptions(bool $forRestore = false): array
     {
         $options = [];
 
-        if (!empty($this->config['sslmode']) && $this->supportsSslMode) {
+        $supportsSslMode = $forRestore ? $this->supportsSslModeRestore : $this->supportsSslMode;
+        if (!empty($this->config['sslmode']) && $supportsSslMode) {
             $options[] = '--ssl-mode=' . escapeshellarg($this->config['sslmode']);
+        } elseif (!empty($this->config['sslmode']) && strtoupper($this->config['sslmode']) === 'DISABLED') {
+            // MariaDB-flavored clients (and old MySQL clients) don't understand
+            // --ssl-mode, but every flavor understands the classic --skip-ssl.
+            // Without it, the client falls back to its own default and rejects
+            // a self-signed server cert instead of skipping TLS as configured.
+            $options[] = '--skip-ssl';
         }
 
         if (!empty($this->config['sslca'])) {
